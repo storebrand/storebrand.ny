@@ -80,7 +80,7 @@ h1, h2.h1lookalike {
     color: @stb-primary-white;
   }
   &.black {
-    color: @stb-secondary-charcoal;
+    color: @stb-secondary-charcoal-text;
   }
 }
 
@@ -88,7 +88,7 @@ h2 {
   font-size: 24px;
   line-height: 30px;
   margin: 48px 6px 6px 0;
-  color: @stb-secondary-charcoal;
+  color: @stb-secondary-charcoal-text;
   font-family: @font-family-signa-book;
   &.dark {
     color: @stb-primary-white;
@@ -111,7 +111,7 @@ h3 {
   font-size: 18px;
   line-height: 22px;
   margin: 24px 9px 6px 0;
-  color: @stb-secondary-charcoal;
+  color: @stb-secondary-charcoal-text;
   font-family: @font-family-sans-serif-bold;
   &.stbfont {
     font-family: @font-family-signa-book;
@@ -126,7 +126,7 @@ h4 {
   line-height: 18px;
   margin: 0;
   margin: 9px 9px 6px 0;
-  color: @stb-secondary-charcoal;
+  color: @stb-secondary-charcoal-text;
   font-family: @font-family-sans-serif-bold;
   &.dark {
     color: @stb-primary-white;
@@ -138,7 +138,7 @@ h5 {
   line-height: 16px;
   margin: 0;
   margin: 9px 9px 6px 0;
-  color: @stb-secondary-charcoal;
+  color: @stb-secondary-charcoal-text;
   font-family: @font-family-sans-serif-bold;
   &.dark {
     color: @stb-primary-white;
@@ -190,12 +190,13 @@ h5.link {
 
 body{
   -webkit-font-smoothing: antialiased;
+  color: @stb-secondary-charcoal-text; /* override BS default #333 */
 }
 
 p {
   font-size: 16px;
   line-height: 24px;
-  color: @stb-secondary-charcoal;
+  color: @stb-secondary-charcoal-text;
   font-family: @font-family-sans-serif;
   margin: 0 0 16px;
   &.intro {
@@ -215,7 +216,7 @@ p {
   }
   &.interest-rate{
     line-height: 46px;
-    color: @stb-secondary-charcoal;
+    color: @stb-secondary-charcoal-text;
     font-family: @font-family-signa-extralight;
     font-size: 60px;
     margin: 18px 12px 12px 0;
@@ -230,7 +231,7 @@ p {
   &.bolded {
     font-size: 18px;
     line-height: 22px;
-    color: @stb-secondary-charcoal;
+    color: @stb-secondary-charcoal-text;
     font-weight: bold;
   }
 
@@ -285,10 +286,10 @@ blockquote {
 }
 
 a {
-  color: @stb-secondary-charcoal;
+  color: @stb-secondary-charcoal-text;
   cursor: pointer;
   text-decoration: none;
-  border-bottom: 1px solid @stb-gray-fifth;
+  border-bottom: 1px solid @stb-secondary-charcoal-text;
   &.twister, &.dropdown-toggle, {
     border: 0;
   }
@@ -344,8 +345,8 @@ a:active{
 //For the webmanual examples
 #typography-links{
   a.standard{
-    color: @stb-secondary-charcoal;
-    border-bottom: 1px solid @stb-secondary-charcoal;
+    color: @stb-secondary-charcoal-text;
+    border-bottom: 1px solid @stb-secondary-charcoal-text;
   }
   a.hovered{
     color: @stb-primary-color;
@@ -412,6 +413,7 @@ ol li ul {
 
 ul.stb,ol.stb { 
   margin: 0px 0px 16px 18px;
+  color: @stb-secondary-charcoal-text;
   li {
     font-size: 16px;
     line-height: 22px;
@@ -462,7 +464,7 @@ ul.stb,ol.stb {
       color: @stb-primary-white;
     }
     &.black {
-      color: @stb-secondary-charcoal;
+      color: @stb-secondary-charcoal-text;
     }    
   }
    
