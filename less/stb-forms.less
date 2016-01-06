@@ -36,8 +36,8 @@ form {
       height: 48px;
       margin-bottom: 24px;
       &:hover {
-        color: @stb-secondary-charcoal;
-        border-color: @stb-secondary-charcoal;
+        color: @stb-secondary-charcoal-text;
+        border-color: @stb-secondary-charcoal-text;
         &[disabled] {
           border-color: @stb-gray-third;
         }
@@ -131,6 +131,7 @@ form {
     select{
       margin-bottom: 24px;
       &.form-control{
+        color: @stb-secondary-charcoal-text;
         height: 48px;
         font-size: 16px;
         @media (max-width: @screen-sm-min) {
@@ -159,6 +160,7 @@ form {
 
   .stb-input-group-addon{
     .input-group-addon();
+    color: @stb-secondary-charcoal-text;
     border: none;
     background: none;
     font-size: 18px;
@@ -231,7 +233,7 @@ form {
     font-size: 14px;
   }
   line-height: 24px;
-  color: #404040;
+  color: @stb-secondary-charcoal-text;
   margin: 0 0 10px;
   input+label{
     font-family: "Open Sans",Arial,ArialMT,sans-serif;
