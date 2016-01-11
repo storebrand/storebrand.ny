@@ -1,7 +1,7 @@
 // CSS for the tabs ( both desktop and mobile)
 
 .tab-container {
-  border-bottom: 1px solid @stb-secondary-charcoal;
+  border-bottom: 1px solid @stb-secondary-charcoal-text;
   ul {
     border: none;
   }
@@ -13,10 +13,10 @@
      >a {
       margin-right: 0;
       display: inline-block;
+      color: @stb-secondary-charcoal-text;
       font-size: 16px;
       font-family: "Open Sans Bold";
       height: 100%;
-      border: 1px solid #404040;
       border-top: 0;
       border-left: 0;
       border-right: 0;
@@ -26,7 +26,6 @@
     >a:hover{
       background-color: @stb-gray-second;
       padding-bottom: 10px;
-      color: #000;
     }
     
     >a:focus {
@@ -35,9 +34,10 @@
     
       
     &.active {
-      border-color: @stb-secondary-charcoal;
+      border-color: @stb-secondary-charcoal-text;
       a{
-      	 border: 1px solid #404040;
+         color: @stb-secondary-charcoal-text; /* overrides BS defaults */
+      	 border: 1px solid @stb-secondary-charcoal-text;
       	 border-bottom-color: transparent;
       	 background-color: @stb-primary-white;
       	
@@ -54,10 +54,15 @@
     background-color: @stb-gray-first;
   }
 
+  .dropdown-toggle.btn-default {
+    color: @stb-secondary-charcoal-text;
+  }
+
   .dropdown{
     button {
       width: 100%;
       text-align: left;
+      color: @stb-secondary-charcoal-text;
       font-family: @font-family-sans-serif-bold;
       border-radius: 0;
       height: 40px;
@@ -66,13 +71,14 @@
     a{
       border-bottom: none;
       padding: 10px 20px;
-      color: @stb-primary-black;
+      color: @stb-secondary-charcoal-text;
     }
 
     a:hover{
       border-bottom: none;
       padding: 10px 20px;
       background: 0 0;
+      color: @stb-secondary-charcoal-text;
       background-color: @stb-gray-second;
     }
 
@@ -81,7 +87,7 @@
     }
 
     li.active a:hover {
-      color: @stb-primary-black;
+      color: @stb-secondary-charcoal-text;
     }
 
     .btn-default:hover, .dropdown .btn-default:focus, .dropdown .btn-default:active {
@@ -138,6 +144,7 @@
 
 
 .tab-content {
+  color: @stb-secondary-charcoal-text; /* override BS defaults */
   clear: both;
 }
 
