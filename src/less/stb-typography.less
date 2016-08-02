@@ -312,7 +312,7 @@ blockquote {
 
 }
 
-a {
+a,.link-lookalike {
   color: @stb-secondary-charcoal-text;
   cursor: pointer;
   text-decoration: none;
@@ -348,7 +348,10 @@ a:visited {
 
 a:hover,
 a:focus,
-a:active {
+a:active,
+.link-lookalike:hover,
+.link-lookalike:focus,
+.link-lookalike:active {
   text-decoration: none;
   color: @stb-primary-color;
   border-bottom: 1px solid @stb-primary-color;
