@@ -19,7 +19,7 @@
   <!-- End of full list of elements needed for web manual, non-optimized -->
 
   <!-- Stuff just for the web manual... -->
-  <script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
   <style type="text/css">
     .toc-list ul.items {
@@ -875,45 +875,150 @@ $(document).ready(function() {
 
     <h3 class="top-margin-40">Sortable table</h3>
     <p>
-      When using tables, we typically want them to be sortable in various ways. This is done with <a href="http://github.hubspot.com/sortable/">sortable</a> by adding the data attribute "data-sortable" to the table tag. The table will be sorted upon page loading, but you can re-sort tables by calling "Sortable.init()" or "Sortable.initTable('#yourtableID')".
+      When using tables, we typically want to sort them in various ways. We use <a href="http://tablesorter.com/docs/">tablesorter</a>, by adding the class "tablesorter" to the table tag. To make a table sortable, first fill it with information and then sort it like this: $('.tablesorter').tablesorter(); (or use whichever selector that fits your context.)
     </p>
     <p>
-      If you want to sort a column based on a different value than what is displayed, you can do this by adding a data-value attribute to the td tags. You can disable sorting of a column by adding "data-sortable='false'" to the corresponding th tag. 
+      If you want to sort a column based on a different value than what is actually displayed, you can do this by adding a data-sort-value attribute to the relevant td tags. You must then sort the table using this method: sortTable('#yourSelector');
     </p>
     <p>
-      Sorting can be done by three default types; alpha, numeric and date; add this to the corresponding th tag: "data-sortable-type='numeric'". You can also define custom sorting.
+      For more information, please see the original <a href="http://tablesorter.com/docs/">project documentation</a>.
     </p>
     <p>
-      You decide how a table initially is sorted, and how, by adding data-sorted and data-sorted-direction attributes to the corresponding th tag, see example below.
+      We have used tablesorter in our standard fund lists, see example below:
     </p>
+
     <div class="table-responsive">
-      <table class="stb-table sortable-theme-minimal" data-sortable>
+      <table id="list-of-funds" class="stb-table fund-table tablesorter" style="display: table;">
         <thead>
           <tr>
-            <th data-sorted="true" data-sorted-direction="ascending">Aksjefond</th>
-            <th class="text-right">Forvaltningshonorar</th>
-            <th class="text-right">Andre gebyrer</th>
+            <th style="text-align: left;" class="header">Fond</th>
+            <th class="hidden-xs text-right header">Siste&nbsp;kurs</th>
+            <th class="hidden-xs text-right header">Dato</th>
+            <th class="text-right header">Siste&nbsp;mnd</th>
+            <th class="hidden-xs text-right header">I&nbsp;år</th>
+            <th class="hidden-xs text-right header">Årlig&nbsp;siste&nbsp;3&nbsp;år</th>
+            <th class="header">Bærekraftsnivå</th>
+            <th class="header">Risiko&nbsp;(1-7)</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Storebrand Good Stuff</td>
-            <td class="text-right">2,25%</td>
-            <td class="text-right">Nei</td>
+        <tbody class="fundsbody" id="fundsBodylist-of-funds"><tr class="fundsRow">
+          <td>
+            <a href="https://www.delphi.no/site/delphino.nsf/Pages/fond_demer.html" target="_blank"><span class="fundName">Delphi Emerging</span></a>
+          </td>
+          <td class="hidden-xs text-right" data-sort-value="1136.68">
+            1&nbsp;136,68&nbsp;
+          </td>
+          <td class="hidden-xs text-right">
+            04.08
+          </td>
+          <td class="text-right" data-sort-value="3.14">
+            <span class="pos month">3,14&nbsp;%</span>
+          </td>
+          <td class="hidden-xs text-right" data-sort-value="0.81">
+            <span class="pos">0,81&nbsp;%</span>
+          </td>
+          <td class="hidden-xs text-right" data-sort-value="6.1">
+            <span class="pos 36m">
+              6,1&nbsp;%
+            </span>
+          </td>
+          <td data-sort-value="5">
+            <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus5.png" style="width: 80px;" alt="Bærekraftsnivå: 5">
+          </td>
+          <td data-sort-value="6">
+            <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-6.png" style="width: 80px;" alt="Risikonivå: 6">
+          </td>
+        </tr>
+        <tr class="fundsRow">
+          <td>
+            <a href="https://www.delphi.no/site/delphino.nsf/Pages/fond_delphieuropa.html" target="_blank"><span class="fundName">Delphi Europe</span></a>
+          </td>
+          <td class="hidden-xs text-right" data-sort-value="2912.97">
+            2&nbsp;912,97&nbsp;
+          </td>
+          <td class="hidden-xs text-right">
+            05.08
+          </td>
+          <td class="text-right" data-sort-value="5.76">
+            <span class="pos month">5,76&nbsp;%</span>
+          </td>
+          <td class="hidden-xs text-right" data-sort-value="-7.9">
+            <span class="neg">-7,9&nbsp;%</span>
+          </td>
+          <td class="hidden-xs text-right" data-sort-value="13.56">
+            <span class="pos 36m">13,56&nbsp;%</span>
+          </td>
+            <td data-sort-value="8">
+              <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus8.png" style="width: 80px;" alt="Bærekraftsnivå: 8">
+            </td>
+            <td data-sort-value="6">
+              <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-6.png" style="width: 80px;" alt="Risikonivå: 6">
+            </td>
           </tr>
-          <tr>
-            <td>Storebrand Pretty Good Stuff</td>
-            <td class="text-right">1,50%</td>
-            <td class="text-right">Ja</td>
-          </tr>
-          <tr>
-            <td>Storebrand Whatever</td>
-            <td class="text-right">0,50%</td>
-            <td class="text-right">Kanskje</td>
+          <tr class="fundsRow">
+            <td>
+              <a href="https://www.delphi.no/site/delphino.nsf/Pages/fond_delphiverden.html" target="_blank"><span class="fundName">Delphi Global</span></a>
+            </td>
+            <td class="hidden-xs text-right" data-sort-value="2558.43">
+              2&nbsp;558,43&nbsp;
+            </td>
+            <td class="hidden-xs text-right">
+              05.08
+            </td>
+            <td class="text-right" data-sort-value="5.55">
+              <span class="pos month">5,55&nbsp;%</span>
+            </td>
+            <td class="hidden-xs text-right" data-sort-value="-6.25">
+              <span class="neg">-6,25&nbsp;%</span>
+            </td>
+            <td class="hidden-xs text-right" data-sort-value="17.34">
+              <span class="pos 36m">17,34&nbsp;%</span>
+            </td>
+            <td data-sort-value="8">
+              <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus8.png" style="width: 80px;" alt="Bærekraftsnivå: 8">
+            </td>
+            <td data-sort-value="6">
+              <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-6.png" style="width: 80px;" alt="Risikonivå: 6">
+            </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="hidden-xs"></td>
+            <td class="hidden-xs"></td>
+            <td class="hidden-xs"></td>
+            <td class="hidden-xs"></td>
+          </tr>
+        </tfoot>
       </table>
+      <script type="text/javascript">
+        sortTable('.tablesorter');
+      </script>
     </div>
+    <h3>Standard funds lists</h3>
+    <p>
+      The kind of fund list shown above, but with live data, can easily be added to any page by including a placeholder and calling a script:
+    </p>
+    <p>Placeholder:</p>
+    <pre class="prettyprint">
+&lt;div class="table-responsive"&gt;
+  &lt;table id="list-of-funds" class="stb-table fund-table tablesorter"&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</pre>
+    <p>Script:</p>
+    <pre>
+  listFunds(["storebrand"], "#list-of-funds");
+  setTimeout(function(){sortTable('#list-of-funds');}, 666);</pre>
+    <p>
+      The "listFunds" function takes two parameters. The first parameter is an array of ISIN or certain predefined strings ("delphi" for all Delphi funds, "storebrand" for all Storebrand funds, "all" for all funds). The second parameter is the id of the placeholder table you want to fill. You can have several lists made like this simultaneously on one page.
+    </p>
+    <p>
+      If you're not happy with this presentation, or your application is on a page that is not allowed to retrieve the JSON feed directly, you can always retrieve the <a href='https://www.storebrand.no/api/open/fundlist/list'>raw data</a> instead, and do whatever you want with it.
+    </p>
   </div>
 
 </div> <!-- /Tables row -->

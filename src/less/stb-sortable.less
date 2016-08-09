@@ -1,21 +1,21 @@
 /* Styling of sortable table elements. */
 
-table[data-sortable] {
+table[tablesorter] {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-table[data-sortable] th {
+table[tablesorter] th {
   vertical-align: bottom;
   font-weight: bold;
 }
 
-table[data-sortable] th, table[data-sortable] td {
+table[tablesorter] th, table[tablesorter] td {
   text-align: left;
   padding: 10px;
 }
 
-table[data-sortable] th:not([data-sortable="false"]) {
+table[tablesorter] th:not([data-sortable="false"]) {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -26,7 +26,7 @@ table[data-sortable] th:not([data-sortable="false"]) {
   cursor: pointer;
 }
 
-table[data-sortable] th:after {
+table[tablesorter] th:after {
   content: "";
   visibility: hidden;
   display: inline-block;
@@ -41,16 +41,16 @@ table[data-sortable] th:after {
   float: right;
 }
 
-table[data-sortable] th[data-sorted="true"]:after {
+table[tablesorter] th[data-sorted="true"]:after {
   visibility: visible;
 }
 
-table[data-sortable] th[data-sorted-direction="descending"]:after {
+table[tablesorter] th[data-sorted-direction="descending"]:after {
   border-top-color: inherit;
   margin-top: 8px;
 }
 
-table[data-sortable] th[data-sorted-direction="ascending"]:after {
+table[tablesorter] th[data-sorted-direction="ascending"]:after {
   border-bottom-color: inherit;
   margin-top: 3px;
 }

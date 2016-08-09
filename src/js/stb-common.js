@@ -323,3 +323,200 @@ function findBootstrapEnvironment() {
   }
 }
 /* ***** End of Function for finding the bootstrap environment ***** */
+
+// Function for helping tablesorter make sense of all kinds of table data by using data-sort-value attribute in header instead of actual table cell contents
+// Parser needed to make tablesorter understand how to sort our data correctly, overriding the standard .tablesorter() function
+function sortTable(sortWhere) {
+  $(sortWhere).tablesorter({
+    textExtraction: function(node) {
+      var attr = $(node).attr('data-sort-value');
+      if (typeof attr !== 'undefined' && attr !== false) {
+        return attr;
+      }
+      return $(node).text();
+    }
+  });
+}
+// End of tablesorter parser fix
+
+// Rounding off numbers to 2 decimals
+function roundToTwo(num) {
+  return +(Math.round(num + "e+2")  + "e-2");
+}
+// End of 2 decimals rounding
+
+// Code needed for including funds lists
+function listFunds(fundsArray, insertWhere) {
+  if (fundsArray != undefined && fundsArray != null && fundsArray.length > 0) {
+
+    // Setting up for later potential sales links
+    var buyability="";
+    var buyHeader = "";
+    var buyFooter = "";
+    if (fundsArray[0]==="storebrand-private") {
+      buyability="private";
+      buyHeader="<th>&nbsp;</th>";
+      buyFooter="<td></td>";
+    } else if (fundsArray[0]==="storebrand-professional") {
+      buyability="professional";
+      buyHeader="<th>&nbsp;</th>";
+      buyFooter="<td></td>";
+    } else {
+      buyability="undecided";
+      buyHeader="";
+      buyFooter="";
+    }
+
+    // Setting up predefined arrays of funds
+    if (fundsArray[0]=="" || fundsArray[0]=="standard") {
+      fundsArray = ["NO0010670755", "NO0010039712", "NO0010317282", "NO0010039696", "NO0010039670", "NO0010039688", "NO0008000940", "NO0008000767", "NO0010297328", "NO0010588031", "NO0010346422", "NO0010033053", "NO0008000973", "NO0008000858", "NO0010611148", "NO0010704265", "NO0010611130", "NO0010302854", "NO0008000957", "NO0008000783", "NO0010044621", "NO0010625734", "NO0010625742", "NO0010080815", "NO0010283021", "NO0010076417", "NO0010657273", "NO0008000841", "NO0008000999"];
+    } else if (fundsArray[0]=="delphi") {
+      fundsArray = ["NO0010670755", "NO0010039712", "NO0010317282", "NO0010039696", "NO0010039670", "NO0010039688"];
+    } else if (fundsArray[0]=="storebrand") {
+      fundsArray = ["NO0008000940", "NO0008000767", "NO0010297328", "NO0010588031", "NO0010346422", "NO0010033053", "NO0008000973", "NO0008000858", "NO0010611148", "NO0010704265", "NO0010611130", "NO0010302854", "NO0008000957", "NO0008000783", "NO0010044621", "NO0010625734", "NO0010625742", "NO0010080815", "NO0010283021", "NO0010076417", "NO0010657273", "NO0008000841", "NO0008000999"];
+    } else if (fundsArray[0]=="storebrand-private") {
+      fundsArray = ["NO0010670755", "NO0010039712", "NO0010317282", "NO0010039696", "NO0010039670", "NO0010039688", "NO0008000767", "NO0010346422", "NO0008000973", "NO0008000858", "NO0010611148", "NO0010704265", "NO0010611130", "NO0010302854", "NO0008000783", "NO0010283021", "NO0010657273", "NO0008000841", "NO0008000999"];
+    } else if (fundsArray[0]=="storebrand-professional") {
+      fundsArray = ["NO0008000940", "NO0010297328", "NO0010588031", "NO0010033053", "NO0008000957", "NO0010044621", "NO0010625734", "NO0010625742", "NO0010080815", "NO0010076417"];
+    }
+
+    var insertionPoint = $(insertWhere);
+    var strippedInsertWhere = insertWhere.substring(1, insertWhere.length);
+    if (insertionPoint != undefined && insertionPoint != null) {
+      insertionPoint.html("");
+      insertionPoint.hide();
+      //var jsonFundsURL = "https://www.storebrand.no/site/stb.nsf/fondslistedummy.json";
+      var jsonFundsURL = "https://www.storebrand.no/api/open/fundlist/list";
+      $.getJSON( jsonFundsURL, function (json) {
+        if (json === null || json === undefined || json.length === 0 ) {
+          insertionPoint.append('<h2 style="margin:20px;color:red">Vi har problemer med å hente fondsinformasjon</h2>');
+        } else {
+          insertionPoint.append( '<thead><tr><th style=\"text-align: left;\">Fond</th><th class=\"hidden-xs text-right\">Siste&nbsp;kurs</th><th class=\"hidden-xs text-right\">Dato</th><th class=\"text-right\">Siste&nbsp;mnd</th><th class=\"hidden-xs text-right\">I&nbsp;år</th><th class=\"hidden-xs text-right\">Årlig&nbsp;siste&nbsp;3&nbsp;år</th><th>Bærekraftsnivå</th><th>Risiko&nbsp;(1-7)</th>' + buyHeader + '</tr></thead>');
+          insertionPoint.append('<tbody class="fundsbody" id="fundsBody'+strippedInsertWhere+'">');
+          for (var i = 0; i<json.length; i++) {
+            var ISIN = json[i].ISIN;
+            var morningstarId = json[i].MorningstarId;
+            if ( fundsArray[0]=="all" || $.inArray(ISIN, fundsArray) > -1) {
+              // We're explicitly told to show all funds, or the current ISIN is found in the submitted array, so this fund should definitely be included in the list
+
+              var legalName =  json[i].Name;
+              var closingPrice = json[i].ClosingPrice;
+              var closingPriceDate = json[i].ClosingPriceDate;
+              var lastMonth = json[i].Return.Month;
+              var thisYear = json[i].Return.ThisYear;
+              var thirtysixMonths = json[i].Return.ThreeYears;
+              var sustainability = json[i].SustainabilityRating;
+              var risk = json[i].Details.InvestmentRisk;
+
+              addToTable(legalName, closingPrice, closingPriceDate, lastMonth, thisYear, thirtysixMonths, sustainability, ISIN, buyability, risk, morningstarId, strippedInsertWhere);
+            }
+          }
+          insertionPoint.append( '</tbody>');
+          insertionPoint.append( '<tfoot><tr><td></td><td></td><td></td><td></td><td class="hidden-xs"></td><td class="hidden-xs"></td><td class="hidden-xs"></td><td class="hidden-xs"></td>' + buyFooter +'</tr>');
+        }
+      });
+      insertionPoint.show(666);
+
+    }
+  }
+}
+
+function addToTable(fundName, fundPrice, fundPriceDate, fundLastMonth, fundThisYear, fund36Months, sustainabilityRating, fundISIN, salesTable, riskRating, securityId, tableId) {
+  // Formatting the various input parameters to prepare them for table presentation
+  var sortFundPrice = fundPrice;
+  if (fundPrice !== "") {
+    fundPrice = roundToTwo(fundPrice) + "&nbsp;";
+  } else {
+    fundPrice = "&mdash;";
+  }
+
+  // Fixing decimal separator
+  fundPrice = fundPrice.replace('.',',');
+  // Fixing thousands separator
+  fundPrice = fundPrice.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1&nbsp;");
+
+  if (fundPriceDate === "") {
+    fundPrice = "&mdash;";
+  } else {
+    fundPriceDate = fundPriceDate.substring(8,10) + "." + fundPriceDate.substring(5,7);
+  }
+
+  var sortFundLastMonth = fundLastMonth;
+  if (fundLastMonth === "") {
+    fundLastMonth = '<span class="month"' + '>' + "&mdash;" + '</span' + '>';
+  } else if (fundLastMonth<0) {
+    fundLastMonth = '<span class="neg month"' + '>' + roundToTwo(fundLastMonth) + '&nbsp;%</span' + '>';
+  } else {
+    fundLastMonth = '<span class="pos month"' + '>' + roundToTwo(fundLastMonth) + '&nbsp;%</span' + '>';
+  }
+  fundLastMonth = fundLastMonth.replace('.',',');
+
+  var sortFundThisYear = fundThisYear;
+  if (fundThisYear === "") {
+    fundThisYear = '<span>' + "&mdash;" + '</span' + '>';
+  } else if (fundThisYear <0) {
+    fundThisYear = '<span class="neg">' + roundToTwo(fundThisYear ) + '&nbsp;%</span' + '>';
+  } else {
+    fundThisYear = '<span class="pos">' + roundToTwo(fundThisYear ) + '&nbsp;%</span' + '>';
+  }
+  fundThisYear = fundThisYear.replace('.',',');
+
+  var sortFund36Months = fund36Months;
+  if (fund36Months === "") {
+    fund36Months = '<span class="36m"' + '>' + "&mdash;" + '</span' + '>';
+  } else if (fund36Months<0) {
+    fund36Months = '<span class="neg 36m"' + '>' + roundToTwo(fund36Months) + '&nbsp;%</span' + '>';
+  } else {
+    fund36Months = '<span class="pos 36m"' + '>' + roundToTwo(fund36Months) + '&nbsp;%</span' + '>';
+  }
+  fund36Months = fund36Months.replace('.',',');
+
+  if (sustainabilityRating==="") {
+    sustainabilityRating = "0";
+  }
+
+  var showSustainabilityRating = '<img src=\"  https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus' + sustainabilityRating + '.png\" style=\"width: 80px;\" alt=\"Bærekraftsnivå: ' + sustainabilityRating + '\">';
+
+  if (riskRating==="") {
+    riskRating = "0";
+  }
+  var showRisk = '<img src=\"  https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-' + riskRating + '.png\" style=\"width: 80px;\" alt=\"Risikonivå: ' + riskRating + '\">';
+
+  // Preparing links to fund detail sheets, based on ISIN or Morningstar Id
+  var fundURL = "";
+  if (fundISIN=="NO0010039712") {
+    fundURL = "https://www.delphi.no/site/delphino.nsf/Pages/fond_delphieuropa.html";
+  } else if (fundISIN=="NO0010317282") {
+    fundURL = "https://www.delphi.no/site/delphino.nsf/Pages/fond_delphiverden.html";
+  } else if (fundISIN=="NO0010039670") {
+    fundURL = "https://www.delphi.no/site/delphino.nsf/Pages/fond_delphinorden.html";
+  }  else if (fundISIN=="NO0010039688") {
+    fundURL = "https://www.delphi.no/site/delphino.nsf/Pages/fond_delphinorge.html";
+  } else if (fundISIN=="NO0010039696") {
+    fundURL= "https://www.delphi.no/site/delphino.nsf/Pages/fond_delphikombinasjon.html";
+  } else if (fundISIN=="NO0010670755") {
+    fundURL = "https://www.delphi.no/site/delphino.nsf/Pages/fond_demer.html";
+  } else {
+    // To be replaced with something that embeds the fund sheet on a storebrand.no page. Will open in new tab for now.
+    fundURL = "https://lt.morningstar.com/3ofqclb12f/snapshot/snapshot.aspx?SecurityToken=" + securityId + "]2]1]FOALL$$ALL_1912&clearcache=true&ClientFund=1&LanguageId=nb-NO&CurrencyId=NOK&UniverseId=FONOR%24%24ALL_1398&BaseCurrencyId=NOK";
+  }
+  var fundLink = '<a href="' + fundURL + '" target="_blank"><span class="fundName"' + '>' + fundName + '</span' + '><' + '/a>';
+
+  if (salesTable==="private") {
+    var shopURL = "https://www2.storebrand.no/fondweb/start.html?funds=" + escape('[{"isin":"' + fundISIN + '"}]');
+    var buyThis = '<td><a href="' + shopURL + '"><span class="stb-sprite-small red shopping-cart"></span>&nbsp;Kjøp</a></td>';
+  }  else if (salesTable==="professional") {
+    var shopURL = "https://www.storebrand.no/site/stb.nsf/pages/sam-handel.html";
+    var buyThis = '<td><a href="' + shopURL + '">Handle</a></td>';
+  } else {
+    showURL = "";
+    buyThis = "";
+  }
+
+  var list = document.getElementById('fundsBody'+tableId);
+  var newRow = document.createElement('tr');
+  newRow.className="fundsRow";
+  newRow.innerHTML = '<td>' + fundLink + '</td><td class=\"hidden-xs text-right\" data-sort-value=\"' + sortFundPrice + '\">' + fundPrice + '</td><td class=\"hidden-xs text-right\">' + fundPriceDate + '</td><td class=\"text-right\" data-sort-value=\"' + sortFundLastMonth + '\">' + fundLastMonth + '</td><td class=\"hidden-xs text-right\" data-sort-value=\"' + sortFundThisYear + '\">' + fundThisYear + '</td><td class=\"hidden-xs text-right\" data-sort-value=\"' + sortFund36Months + '\">' + fund36Months + '</td><td data-sort-value=\"' + sustainabilityRating + '\">' + showSustainabilityRating + '</td><td data-sort-value=\"' + riskRating + '\">' + showRisk + '</td>' + buyThis;
+  list.appendChild(newRow);
+}
+// End of code for funds lists

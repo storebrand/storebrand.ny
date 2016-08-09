@@ -175,4 +175,37 @@ table td, table th { padding: 9px 10px; text-align: left; }
 
   table.responsive td{ position: relative; white-space: nowrap; overflow: hidden; }
   table.responsive th:first-child, table.responsive td:first-child, table.responsive td:first-child, table.responsive.pinned td { display: none; }
+
+} // End of table.stb-table
+
+// Styling of funds lists
+table.fund-table {
+  font-size: 1em;
+  color: #242424;
+  font-weight: 600;
 }
+
+table.fund-table th, table.fund-table tfoot {
+  border-right:2px solid #e5e5e5;
+  background: #cbcbcb;
+}
+
+table.fund-table tbody>tr {
+  border-left:2px solid #e5e5e5;
+}
+
+table.fund-table tbody>tr>td {
+  border-right:2px solid #e5e5e5;
+  border-bottom: none;
+  padding-top:10px;
+  padding-bottom: 10px;
+}
+
+span.pos {
+  color: #0273b2;
+}
+
+span.neg {
+  color: #e81e2a;
+}
+// End of styling of funds lists
