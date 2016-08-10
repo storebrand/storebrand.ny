@@ -348,7 +348,6 @@ function roundToTwo(num) {
 // Code needed for including funds lists
 function listFunds(fundsArray, insertWhere) {
   if (fundsArray != undefined && fundsArray != null && fundsArray.length > 0) {
-
     // Setting up for later potential sales links
     var buyability="";
     var buyHeader = "";
@@ -383,16 +382,19 @@ function listFunds(fundsArray, insertWhere) {
     var insertionPoint = $(insertWhere);
     var strippedInsertWhere = insertWhere.substring(1, insertWhere.length);
     if (insertionPoint != undefined && insertionPoint != null) {
-      insertionPoint.html("");
-      insertionPoint.hide();
+      var newHTML = "";
       //var jsonFundsURL = "https://www.storebrand.no/site/stb.nsf/fondslistedummy.json";
       var jsonFundsURL = "https://www.storebrand.no/api/open/fundlist/list";
       $.getJSON( jsonFundsURL, function (json) {
         if (json === null || json === undefined || json.length === 0 ) {
-          insertionPoint.append('<h2 style="margin:20px;color:red">Vi har problemer med å hente fondsinformasjon</h2>');
+          newHTML = newHTML + '<h2 style="margin:20px;color:red">Vi har problemer med å hente fondsinformasjon</h2>';
         } else {
-          insertionPoint.append( '<thead><tr><th style=\"text-align: left;\">Fond</th><th class=\"hidden-xs text-right\">Siste&nbsp;kurs</th><th class=\"hidden-xs text-right\">Dato</th><th class=\"text-right\">Siste&nbsp;mnd</th><th class=\"hidden-xs text-right\">I&nbsp;år</th><th class=\"hidden-xs text-right\">Årlig&nbsp;siste&nbsp;3&nbsp;år</th><th>Bærekraftsnivå</th><th>Risiko&nbsp;(1-7)</th>' + buyHeader + '</tr></thead>');
-          insertionPoint.append('<tbody class="fundsbody" id="fundsBody'+strippedInsertWhere+'">');
+          newHTML = newHTML + '<thead><tr><th style=\"text-align: left;\">Fond</th><th class=\"hidden-xs text-right\">Siste&nbsp;kurs</th><th class=\"hidden-xs text-right\">Dato</th><th class=\"text-right\">Siste&nbsp;mnd</th><th class=\"hidden-xs text-right\">I&nbsp;år</th><th class=\"hidden-xs text-right\">Årlig&nbsp;siste&nbsp;3&nbsp;år</th><th>Bærekraftsnivå</th><th>Risiko&nbsp;(1-7)</th>' + buyHeader + '</tr></thead>';
+          newHTML = newHTML + '<tbody class="fundsbody" id="fundsBody'+strippedInsertWhere+'">';
+          newHTML = newHTML + '</tbody>';
+          newHTML = newHTML + '<tfoot><tr><td></td><td></td><td></td><td></td><td class="hidden-xs"></td><td class="hidden-xs"></td><td class="hidden-xs"></td><td class="hidden-xs"></td>' + buyFooter +'</tr>';
+          insertionPoint.html(newHTML);
+
           for (var i = 0; i<json.length; i++) {
             var ISIN = json[i].ISIN;
             var morningstarId = json[i].MorningstarId;
@@ -411,12 +413,8 @@ function listFunds(fundsArray, insertWhere) {
               addToTable(legalName, closingPrice, closingPriceDate, lastMonth, thisYear, thirtysixMonths, sustainability, ISIN, buyability, risk, morningstarId, strippedInsertWhere);
             }
           }
-          insertionPoint.append( '</tbody>');
-          insertionPoint.append( '<tfoot><tr><td></td><td></td><td></td><td></td><td class="hidden-xs"></td><td class="hidden-xs"></td><td class="hidden-xs"></td><td class="hidden-xs"></td>' + buyFooter +'</tr>');
         }
       });
-      insertionPoint.show(666);
-
     }
   }
 }
@@ -475,12 +473,12 @@ function addToTable(fundName, fundPrice, fundPriceDate, fundLastMonth, fundThisY
     sustainabilityRating = "0";
   }
 
-  var showSustainabilityRating = '<img src=\"  https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus' + sustainabilityRating + '.png\" style=\"width: 80px;\" alt=\"Bærekraftsnivå: ' + sustainabilityRating + '\">';
+  var showSustainabilityRating = '<img src=\"https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus' + sustainabilityRating + '.png\" style=\"width: 80px;\" alt=\"Bærekraftsnivå: ' + sustainabilityRating + '\">';
 
   if (riskRating==="") {
     riskRating = "0";
   }
-  var showRisk = '<img src=\"  https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-' + riskRating + '.png\" style=\"width: 80px;\" alt=\"Risikonivå: ' + riskRating + '\">';
+  var showRisk = '<img src=\"https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-' + riskRating + '.png\" style=\"width: 80px;\" alt=\"Risikonivå: ' + riskRating + '\">';
 
   // Preparing links to fund detail sheets, based on ISIN or Morningstar Id
   var fundURL = "";
