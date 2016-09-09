@@ -21,6 +21,7 @@ module.exports = function(grunt) {
               './node_modules/jquery-match-height/dist/jquery.matchHeight.js',
               './node_modules/jquery.hotkeys/jquery.hotkeys.js',
               './src/js/jquery-ui-1.11.0.js',
+              './src/js/jquery.tablesorter.js',
 
               // bootstrap code, all plugins
               './node_modules/bootstrap/dist/js/bootstrap.js',
@@ -31,7 +32,6 @@ module.exports = function(grunt) {
               './src/js/stb-page-padding.js',
               './src/js/stb-video.js',
               './src/js/bootstrapValidator-0.5.3.js',
-              './src/js/stb-sortable.js',
 
               // './node_modules/moment/moment.js',
 
