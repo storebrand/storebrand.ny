@@ -884,137 +884,46 @@ $(document).ready(function() {
       For more information, please see the original <a href="http://tablesorter.com/docs/">project documentation</a>.
     </p>
     <p>
-      We have used tablesorter in our standard fund lists, see example below:
+      We have used tablesorter in our standard fund lists, see example below. 
     </p>
-
+    <div id="tableTitle"></div>
     <div class="table-responsive">
-      <table id="list-of-funds" class="stb-table fund-table tablesorter" style="display: table;">
-        <thead>
-          <tr>
-            <th style="text-align: left;" class="header">Fond</th>
-            <th class="hidden-xs text-right header">Siste&nbsp;kurs</th>
-            <th class="hidden-xs text-right header">Dato</th>
-            <th class="text-right header">Siste&nbsp;mnd</th>
-            <th class="hidden-xs text-right header">I&nbsp;år</th>
-            <th class="hidden-xs text-right header">Årlig&nbsp;siste&nbsp;3&nbsp;år</th>
-            <th class="header">Bærekraftsnivå</th>
-            <th class="header">Risiko&nbsp;(1-7)</th>
-          </tr>
-        </thead>
-        <tbody class="fundsbody" id="fundsBodylist-of-funds"><tr class="fundsRow">
-          <td>
-            <a href="https://www.delphi.no/site/delphino.nsf/Pages/fond_demer.html" target="_blank"><span class="fundName">Delphi Emerging</span></a>
-          </td>
-          <td class="hidden-xs text-right" data-sort-value="1136.68">
-            1&nbsp;136,68&nbsp;
-          </td>
-          <td class="hidden-xs text-right">
-            04.08
-          </td>
-          <td class="text-right" data-sort-value="3.14">
-            <span class="pos month">3,14&nbsp;%</span>
-          </td>
-          <td class="hidden-xs text-right" data-sort-value="0.81">
-            <span class="pos">0,81&nbsp;%</span>
-          </td>
-          <td class="hidden-xs text-right" data-sort-value="6.1">
-            <span class="pos 36m">
-              6,1&nbsp;%
-            </span>
-          </td>
-          <td data-sort-value="5">
-            <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus5.png" style="width: 80px;" alt="Bærekraftsnivå: 5">
-          </td>
-          <td data-sort-value="6">
-            <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-6.png" style="width: 80px;" alt="Risikonivå: 6">
-          </td>
-        </tr>
-        <tr class="fundsRow">
-          <td>
-            <a href="https://www.delphi.no/site/delphino.nsf/Pages/fond_delphieuropa.html" target="_blank"><span class="fundName">Delphi Europe</span></a>
-          </td>
-          <td class="hidden-xs text-right" data-sort-value="2912.97">
-            2&nbsp;912,97&nbsp;
-          </td>
-          <td class="hidden-xs text-right">
-            05.08
-          </td>
-          <td class="text-right" data-sort-value="5.76">
-            <span class="pos month">5,76&nbsp;%</span>
-          </td>
-          <td class="hidden-xs text-right" data-sort-value="-7.9">
-            <span class="neg">-7,9&nbsp;%</span>
-          </td>
-          <td class="hidden-xs text-right" data-sort-value="13.56">
-            <span class="pos 36m">13,56&nbsp;%</span>
-          </td>
-            <td data-sort-value="8">
-              <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus8.png" style="width: 80px;" alt="Bærekraftsnivå: 8">
-            </td>
-            <td data-sort-value="6">
-              <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-6.png" style="width: 80px;" alt="Risikonivå: 6">
-            </td>
-          </tr>
-          <tr class="fundsRow">
-            <td>
-              <a href="https://www.delphi.no/site/delphino.nsf/Pages/fond_delphiverden.html" target="_blank"><span class="fundName">Delphi Global</span></a>
-            </td>
-            <td class="hidden-xs text-right" data-sort-value="2558.43">
-              2&nbsp;558,43&nbsp;
-            </td>
-            <td class="hidden-xs text-right">
-              05.08
-            </td>
-            <td class="text-right" data-sort-value="5.55">
-              <span class="pos month">5,55&nbsp;%</span>
-            </td>
-            <td class="hidden-xs text-right" data-sort-value="-6.25">
-              <span class="neg">-6,25&nbsp;%</span>
-            </td>
-            <td class="hidden-xs text-right" data-sort-value="17.34">
-              <span class="pos 36m">17,34&nbsp;%</span>
-            </td>
-            <td data-sort-value="8">
-              <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus8.png" style="width: 80px;" alt="Bærekraftsnivå: 8">
-            </td>
-            <td data-sort-value="6">
-              <img src="https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-6.png" style="width: 80px;" alt="Risikonivå: 6">
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="hidden-xs"></td>
-            <td class="hidden-xs"></td>
-            <td class="hidden-xs"></td>
-            <td class="hidden-xs"></td>
-          </tr>
-        </tfoot>
+      <table id="list-of-funds" class="stb-table fund-table tablesorter">
       </table>
-      <script type="text/javascript">
-        sortTable('.tablesorter');
-      </script>
-    </div>
+    </div>    
+    <script type="text/javascript">
+      listFunds(['active'], 'Viser nå bare aktivt forvaltede fond', '#list-of-funds', 'show', 'show', 'no-trading-please');
+      setTimeout(function(){sortTable('#list-of-funds');}, 666);
+    </script>
+
     <h3>Standard funds lists</h3>
     <p>
       The kind of fund list shown above, but with live data, can easily be added to any page by including a placeholder and calling a script:
     </p>
     <p>Placeholder:</p>
     <pre class="prettyprint">
+&lt;div id="tableTitle"&gt;&lt;/div&gt;
 &lt;div class="table-responsive"&gt;
-  &lt;table id="list-of-funds" class="stb-table fund-table tablesorter"&gt;
+  &lt;table id="id-for-table-insertion" class="stb-table fund-table tablesorter"&gt;
   &lt;/table&gt;
 &lt;/div&gt;</pre>
     <p>Script:</p>
     <pre>
-  listFunds(["storebrand"], "#list-of-funds");
+  listFunds(["storebrand"], "Title above list", "#id-for-table-insertion", "show|hide", "show|hide", "private|professional|whatever");
   setTimeout(function(){sortTable('#list-of-funds');}, 666);</pre>
     <p>
-      The "listFunds" function takes two parameters. The first parameter is an array of ISIN or certain predefined strings ("delphi" for all Delphi funds, "storebrand" for all Storebrand funds, "all" for all funds). The second parameter is the id of the placeholder table you want to fill. You can have several lists made like this simultaneously on one page.
+      The "listFunds" function takes six parameters:
+    </p>
+    <ol class="stb">
+      <li>An array of ISIN or certain predefined strings ("all" for all funds we have data for, "delphi" for all Delphi funds, "storebrand" for all Storebrand funds, "storebrand-private" for private market funds, "storebrand-professional" for professional investors funds, "active" for actively managed funds, "factor" for factor funds, "index" for index funds" and "interest" for interest rate funds).</li>
+      <li>A title that will be injected above the fund list.</li>
+      <li>An id of the placeholder table you want to fill with fund data.</li>
+      <li>A flag to "hide" or "show" a column showing the sustainability rating for the fund.</li>
+      <li>A flag to "hide" or "show" a column showing the risk (1-7) for the fund.</li>
+      <li>A flag to "hide" or show links to pages where the fund can be traded, either for "private" or "professional" investors.</li>
+    </ol>
+    <p>
+      You can of course have as many different lists as you want on any single page.
     </p>
     <p>
       If you're not happy with this presentation, or your application is on a page that is not allowed to retrieve the JSON feed directly, you can always retrieve the <a href='https://www.storebrand.no/api/open/fundlist/list'>raw data</a> instead, and do whatever you want with it.

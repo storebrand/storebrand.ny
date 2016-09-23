@@ -346,24 +346,54 @@ function roundToTwo(num) {
 // End of 2 decimals rounding
 
 // Code needed for including funds lists
-function listFunds(fundsArray, insertWhere) {
+function listFunds(fundsArray, tableTitle, insertWhere, showSustainability, showRisk, showTrade) {
+  if (tableTitle!="") {
+    if ($("#tableTitle") != undefined) {
+      $("#tableTitle").html("<p class='header3'>" + tableTitle + "</p>");
+    }
+  }
+
   if (fundsArray != undefined && fundsArray != null && fundsArray.length > 0) {
-    // Setting up for later potential sales links
+    // Setting up for potential sales links
     var buyability="";
     var buyHeader = "";
     var buyFooter = "";
-    if (fundsArray[0]==="storebrand-private") {
+    
+    // Setting up for potential sustainability column
+    var sustainabilityHeader = ""; 
+    var sustainabilityFooter = ""; 
+
+    // Setting up for potential sustainability column
+    var riskHeader = ""; 
+    var riskFooter = ""; 
+
+    // Three possible tradeLink values decides whether a trade link/button should be included in the table or not.
+    if (showTrade==="private") {
       buyability="private";
-      buyHeader="<th>&nbsp;</th>";
+      buyHeader="<th class=\"no-sort\">&nbsp;</th>";
       buyFooter="<td></td>";
-    } else if (fundsArray[0]==="storebrand-professional") {
+    } else if (showTrade==="professional") {
       buyability="professional";
-      buyHeader="<th>&nbsp;</th>";
+      buyHeader="<th class=\"no-sort\">&nbsp;</th>";
       buyFooter="<td></td>";
     } else {
       buyability="undecided";
       buyHeader="";
       buyFooter="";
+    }
+
+    if (showSustainability==="show") {
+      sustainabilityHeader = "<th class=\"hidden-xs\">Bærekraftsnivå</th>";
+      sustainabilityFooter = "<td></td>";
+    } else {
+      sustainabilityFooter = "<td class=\"visible-xs\"></td>";
+    }
+
+    if (showRisk==="show") {
+      riskHeader = "<th class=\"hidden-xs\">Risiko</th>"; 
+      riskFooter = "<td class=\"hidden-xs\"></td>";
+    } else {
+      riskFooter = "";
     }
 
     // Setting up predefined arrays of funds
@@ -374,25 +404,32 @@ function listFunds(fundsArray, insertWhere) {
     } else if (fundsArray[0]=="storebrand") {
       fundsArray = ["NO0008000940", "NO0008000767", "NO0010297328", "NO0010588031", "NO0010346422", "NO0010033053", "NO0008000973", "NO0008000858", "NO0010611148", "NO0010704265", "NO0010611130", "NO0010302854", "NO0008000957", "NO0008000783", "NO0010044621", "NO0010625734", "NO0010625742", "NO0010080815", "NO0010283021", "NO0010076417", "NO0010657273", "NO0008000841", "NO0008000999"];
     } else if (fundsArray[0]=="storebrand-private") {
-      fundsArray = ["NO0010670755", "NO0010039712", "NO0010317282", "NO0010039696", "NO0010039670", "NO0010039688", "NO0008000767", "NO0010346422", "NO0008000973", "NO0008000858", "NO0010611148", "NO0010704265", "NO0010611130", "NO0010302854", "NO0008000783", "NO0010283021", "NO0010657273", "NO0008000841", "NO0008000999"];
+      fundsArray = ["NO0010039712", "NO0010670755", "NO0010317282", "NO0010039696", "NO0010039670", "NO0010039688", "NO0008000767", "NO0010346422", "NO0008000973", "NO0008000858", "NO0010611148", "NO0010704265", "NO0010611130", "NO0010302854", "NO0008000783", "NO0010283021", "NO0010657273", "NO0008000841", "NO0008000999"];
     } else if (fundsArray[0]=="storebrand-professional") {
       fundsArray = ["NO0008000940", "NO0010297328", "NO0010588031", "NO0010033053", "NO0008000957", "NO0010044621", "NO0010625734", "NO0010625742", "NO0010080815", "NO0010076417"];
+    } else if(fundsArray[0]=="active") {
+      fundsArray = ["NO0010670755", "NO0010039712", "NO0010317282", "NO0010039670", "NO0010039688", "NO0008000940", "NO0008000783", "NO0010080815", "NO0008000841", "NO0008000999"];
+    } else if(fundsArray[0]=="factor") {
+      fundsArray = ["NO0010346422", "NO0008000973", "NO0010657273"];
+    } else if(fundsArray[0]=="index") {
+      fundsArray = ["NO0010297328", "NO0010611148", "NO0010611130", "NO0010704265"];
+    } else if(fundsArray[0]=="interest") {
+      fundsArray = ["NO0010625734", "NO0010625742", "NO0010283021", "NO0010588031", "NO0010033053", "NO0008000957", "NO0008000858"];
     }
 
     var insertionPoint = $(insertWhere);
     var strippedInsertWhere = insertWhere.substring(1, insertWhere.length);
     if (insertionPoint != undefined && insertionPoint != null) {
       var newHTML = "";
-      //var jsonFundsURL = "https://www.storebrand.no/site/stb.nsf/fondslistedummy.json";
       var jsonFundsURL = "https://www.storebrand.no/api/open/fundlist/list";
       $.getJSON( jsonFundsURL, function (json) {
         if (json === null || json === undefined || json.length === 0 ) {
           newHTML = newHTML + '<h2 style="margin:20px;color:red">Vi har problemer med å hente fondsinformasjon</h2>';
         } else {
-          newHTML = newHTML + '<thead><tr><th style=\"text-align: left;\">Fond</th><th class=\"hidden-xs text-right\">Siste&nbsp;kurs</th><th class=\"hidden-xs text-right\">Dato</th><th class=\"text-right\">Siste&nbsp;mnd</th><th class=\"hidden-xs text-right\">I&nbsp;år</th><th class=\"hidden-xs text-right\">Årlig&nbsp;siste&nbsp;3&nbsp;år</th><th>Bærekraftsnivå</th><th>Risiko&nbsp;(1-7)</th>' + buyHeader + '</tr></thead>';
+          newHTML = newHTML + '<thead><tr><th style=\"text-align: left;\">Fond</th><th class=\"hidden-xs text-right\">Dato</th><th class=\"text-right\">I&nbsp;år</th><th class=\"hidden-xs text-right\">Årlig&nbsp;siste&nbsp;3&nbsp;år</th><th class=\"text-right\">Årlig&nbsp;siste&nbsp;5&nbsp;år</th>' + sustainabilityHeader + riskHeader + buyHeader + '</tr></thead>';
           newHTML = newHTML + '<tbody class="fundsbody" id="fundsBody'+strippedInsertWhere+'">';
           newHTML = newHTML + '</tbody>';
-          newHTML = newHTML + '<tfoot><tr><td></td><td></td><td></td><td></td><td class="hidden-xs"></td><td class="hidden-xs"></td><td class="hidden-xs"></td><td class="hidden-xs"></td>' + buyFooter +'</tr>';
+          newHTML = newHTML + '<tfoot><tr><td></td><td><td class="hidden-xs"></td><td class="hidden-xs"></td><td class="hidden-xs"></td></td>' + sustainabilityFooter + riskFooter + buyFooter +'</tr>';
           insertionPoint.html(newHTML);
 
           for (var i = 0; i<json.length; i++) {
@@ -407,10 +444,11 @@ function listFunds(fundsArray, insertWhere) {
               var lastMonth = json[i].Return.Month;
               var thisYear = json[i].Return.ThisYear;
               var thirtysixMonths = json[i].Return.ThreeYears;
+              var sixtyMonths = json[i].Return.FiveYears;
               var sustainability = json[i].SustainabilityRating;
               var risk = json[i].Details.InvestmentRisk;
 
-              addToTable(legalName, closingPrice, closingPriceDate, lastMonth, thisYear, thirtysixMonths, sustainability, ISIN, buyability, risk, morningstarId, strippedInsertWhere);
+              addToTable( ISIN, legalName, morningstarId, closingPriceDate, thisYear, thirtysixMonths, sixtyMonths, sustainability, risk, buyability, showSustainability, showRisk, strippedInsertWhere);
             }
           }
         }
@@ -419,35 +457,14 @@ function listFunds(fundsArray, insertWhere) {
   }
 }
 
-function addToTable(fundName, fundPrice, fundPriceDate, fundLastMonth, fundThisYear, fund36Months, sustainabilityRating, fundISIN, salesTable, riskRating, securityId, tableId) {
+function addToTable(fundISIN, fundName, securityId, fundPriceDate, fundThisYear, fund36Months, fund60Months, sustainabilityRating, riskRating, salesTable, sustainTable, riskTable, tableId) {
   // Formatting the various input parameters to prepare them for table presentation
-  var sortFundPrice = fundPrice;
-  if (fundPrice !== "") {
-    fundPrice = roundToTwo(fundPrice) + "&nbsp;";
-  } else {
-    fundPrice = "&mdash;";
-  }
-
-  // Fixing decimal separator
-  fundPrice = fundPrice.replace('.',',');
-  // Fixing thousands separator
-  fundPrice = fundPrice.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1&nbsp;");
 
   if (fundPriceDate === "") {
     fundPrice = "&mdash;";
   } else {
     fundPriceDate = fundPriceDate.substring(8,10) + "." + fundPriceDate.substring(5,7);
   }
-
-  var sortFundLastMonth = fundLastMonth;
-  if (fundLastMonth === "") {
-    fundLastMonth = '<span class="month"' + '>' + "&mdash;" + '</span' + '>';
-  } else if (fundLastMonth<0) {
-    fundLastMonth = '<span class="neg month"' + '>' + roundToTwo(fundLastMonth) + '&nbsp;%</span' + '>';
-  } else {
-    fundLastMonth = '<span class="pos month"' + '>' + roundToTwo(fundLastMonth) + '&nbsp;%</span' + '>';
-  }
-  fundLastMonth = fundLastMonth.replace('.',',');
 
   var sortFundThisYear = fundThisYear;
   if (fundThisYear === "") {
@@ -469,17 +486,39 @@ function addToTable(fundName, fundPrice, fundPriceDate, fundLastMonth, fundThisY
   }
   fund36Months = fund36Months.replace('.',',');
 
+  var sortFund60Months = fund60Months;
+  if (fund60Months === "") {
+    fund60Months = '<span class="60m"' + '>' + "&mdash;" + '</span' + '>';
+  } else if (fund60Months<0) {
+    fund60Months = '<span class="neg 60m"' + '>' + roundToTwo(fund60Months) + '&nbsp;%</span' + '>';
+  } else {
+    fund60Months = '<span class="pos 60m"' + '>' + roundToTwo(fund60Months) + '&nbsp;%</span' + '>';
+  }
+  fund60Months = fund60Months.replace('.',',');
+
   if (sustainabilityRating==="") {
     sustainabilityRating = "0";
   }
 
   var showSustainabilityRating = '<img src=\"https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus' + sustainabilityRating + '.png\" style=\"width: 80px;\" alt=\"Bærekraftsnivå: ' + sustainabilityRating + '\">';
+  if(sustainTable==="show") {
+    showSustainabilityRating = '<td class=\"hidden-xs\" data-sort-value=\"' + sustainabilityRating + '\">' + showSustainabilityRating + '</td>';
+  } else {
+    showSustainabilityRating = '';
+  }
 
   if (riskRating==="") {
     riskRating = "0";
   }
-  var showRisk = '<img src=\"https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-' + riskRating + '.png\" style=\"width: 80px;\" alt=\"Risikonivå: ' + riskRating + '\">';
-
+  //var showRisk = '<img src=\"https://elements.storebrand.no/storebrand.ny/0.94/images/scales/risiko-' + riskRating + '.png\" style=\"width: 80px;\" alt=\"Risikonivå: ' + riskRating + '\">';
+  if (riskRating == undefined) { riskRating = "Ukjent"; }
+  var showRisk = riskRating + ' av 7';
+  if(riskTable==="show") {
+    showRisk = '<td class=\"hidden-xs\" data-sort-value=\"' + riskRating + '\">' + showRisk + '</td>';
+  } else {
+    showRisk = '';
+  }
+  
   // Preparing links to fund detail sheets, based on ISIN or Morningstar Id
   var fundURL = "";
   if (fundISIN=="NO0010039712") {
@@ -495,10 +534,11 @@ function addToTable(fundName, fundPrice, fundPriceDate, fundLastMonth, fundThisY
   } else if (fundISIN=="NO0010670755") {
     fundURL = "https://www.delphi.no/site/delphino.nsf/Pages/fond_demer.html";
   } else {
-    // To be replaced with something that embeds the fund sheet on a storebrand.no page. Will open in new tab for now.
-    fundURL = "https://lt.morningstar.com/3ofqclb12f/snapshot/snapshot.aspx?SecurityToken=" + securityId + "]2]1]FOALL$$ALL_1912&clearcache=true&ClientFund=1&LanguageId=nb-NO&CurrencyId=NOK&UniverseId=FONOR%24%24ALL_1398&BaseCurrencyId=NOK";
+    // Link to detailed information on iframe from Morningstar enclosed by a Storebrand page.
+    fundURL = "https://www.storebrand.no/privat/sparing/fondsark?securityid=" + securityId;
+    //fundURL = "https://lt.morningstar.com/3ofqclb12f/snapshot/snapshot.aspx?SecurityToken=" + securityId + "]2]1]FOALL$$ALL_1912&clearcache=true&ClientFund=1&LanguageId=nb-NO&CurrencyId=NOK&UniverseId=FONOR%24%24ALL_1398&BaseCurrencyId=NOK";
   }
-  var fundLink = '<a href="' + fundURL + '" target="_blank"><span class="fundName"' + '>' + fundName + '</span' + '><' + '/a>';
+  var fundLink = '<a href="' + fundURL + '"><span class="fundName"' + '>' + fundName + '</span' + '><' + '/a>';
 
   if (salesTable==="private") {
     var shopURL = "https://www2.storebrand.no/fondweb/start.html?funds=" + escape('[{"isin":"' + fundISIN + '"}]');
@@ -514,7 +554,7 @@ function addToTable(fundName, fundPrice, fundPriceDate, fundLastMonth, fundThisY
   var list = document.getElementById('fundsBody'+tableId);
   var newRow = document.createElement('tr');
   newRow.className="fundsRow";
-  newRow.innerHTML = '<td>' + fundLink + '</td><td class=\"hidden-xs text-right\" data-sort-value=\"' + sortFundPrice + '\">' + fundPrice + '</td><td class=\"hidden-xs text-right\">' + fundPriceDate + '</td><td class=\"text-right\" data-sort-value=\"' + sortFundLastMonth + '\">' + fundLastMonth + '</td><td class=\"hidden-xs text-right\" data-sort-value=\"' + sortFundThisYear + '\">' + fundThisYear + '</td><td class=\"hidden-xs text-right\" data-sort-value=\"' + sortFund36Months + '\">' + fund36Months + '</td><td data-sort-value=\"' + sustainabilityRating + '\">' + showSustainabilityRating + '</td><td data-sort-value=\"' + riskRating + '\">' + showRisk + '</td>' + buyThis;
+  newRow.innerHTML = '<td>' + fundLink + '</td><td class=\"hidden-xs text-right\">' + fundPriceDate + '</td><td class=\"text-right\" data-sort-value=\"' + sortFundThisYear + '\">' + fundThisYear + '</td><td class=\"hidden-xs text-right\" data-sort-value=\"' + sortFund36Months + '\">' + fund36Months + '</td><td class=\"text-right\" data-sort-value=\"' + sortFund60Months + '\">' + fund60Months + '</td>' + showSustainabilityRating + showRisk + buyThis;
   list.appendChild(newRow);
 }
 // End of code for funds lists
