@@ -611,7 +611,7 @@ var idValidatorCorporate = {
 
 //Adds cartIcon if cartCount cookie is found
 function addCartBtn(count) {
-  $('body').prepend("<div class='cartIcon shoppingCartIcon'><a href='/utsjekk/#/cart/'><div class='circle-24 stbcolor-gray fifth '><span class='stb-sprite-medium white shopping-cart'></span></div><div class='circle-16 stbcolor-primary first darker cartNr' style='border-radius:24px;height:24px;width:24px;padding-left:9px;padding-top:2px;'><h6 class='h2Number'>"+count+"</h6></div></a></div>");
+  $('body').prepend("<div class='cartIcon shoppingCartIcon'><a href='/utsjekk/#/cart/'><div class='circle-24 stbcolor-secondary first'><span class='stb-sprite-medium white shopping-cart'></span></div><div class='circle-16 stbcolor-primary first cartNr' style='border-radius:24px;height:24px;width:24px;padding-left:9px;padding-top:2px;'><h6 class='h2Number'>"+count+"</h6></div></a></div>");
 }
 
 //Toggle cart show/hide when scrolling
