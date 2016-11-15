@@ -624,7 +624,7 @@ function getCartUrl() {
       ? 'www' + getOptionalEnv() + '.storebrand.no'
       : 'client' + getOptionalEnv() + '.stb.intra';
   }
-  return location.protocol + '://' + getOrderClientHost() + path;
+  return location.protocol + '//' + getOrderClientHost() + path;
 }
 
 //Adds cartIcon if cartCount cookie is found
