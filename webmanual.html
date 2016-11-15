@@ -511,7 +511,7 @@ $(document).ready(function() {
   </div>
   <div class="col-md-9">
     <p>
-      Circles are popping up in various design work lately. Here's an example of how you can avoid using graphics when circle + text is required. It works with various degrees of success, the current styling is optimized for three average-width characters, suitable for the purpose so far. The possibilities can be extended. 
+      Circles are popping up in various design work lately. Here's an example of how you can avoid using graphics when circle + text is required. It works with various degrees of success, the current styling is optimized for three average-width characters, suitable for the purpose so far. The possibilities can be extended.
     </p>
     <p class="top-padding-40">
     <span class="circled-text three">1+1</span> <span class="circled-text three">&nbsp;&nbsp;=&nbsp;&nbsp;</span> <span class="circled-text three">TWO</span><br /><br /></p>
@@ -592,7 +592,7 @@ $(document).ready(function() {
     <div class="col-md-12">
       <div class="col-md-4 column top-padding-10 stbcolor-secondary second">
         <h3>Tall column</h3>
-        <p> Lorem Ipsum er rett og slett dummytekst fra og for trykkeindustrien. 
+        <p> Lorem Ipsum er rett og slett dummytekst fra og for trykkeindustrien.
         </p>
         <p>
         Lorem Ipsum har vært bransjens standard for dummytekst helt siden 1500-tallet, da en ukjent boktrykker stokket en mengde bokstaver for å lage et prøveeksemplar av en bok.
@@ -884,13 +884,13 @@ $(document).ready(function() {
       For more information, please see the original <a href="http://tablesorter.com/docs/">project documentation</a>.
     </p>
     <p>
-      We have used tablesorter in our standard fund lists, see example below. 
+      We have used tablesorter in our standard fund lists, see example below.
     </p>
     <div id="tableTitle"></div>
     <div class="table-responsive">
       <table id="list-of-funds" class="stb-table fund-table tablesorter">
       </table>
-    </div>    
+    </div>
     <script type="text/javascript">
       listFunds(['active'], 'Viser nå bare aktivt forvaltede fond', '#list-of-funds', 'show', 'show', 'no-trading-please');
       setTimeout(function(){sortTable('#list-of-funds');}, 666);
@@ -1755,7 +1755,7 @@ $('ul[data-widget=stbFaq]').stbFaq();
   <div class="col-md-9">
     <h3>Waiting for Godot</h3>
     <p>
-      This animation can be used when you want to tell the user to wait for something to happen. 
+      This animation can be used when you want to tell the user to wait for something to happen.
     </p>
 
 		<div class="col-md-12 bottom-padding-10">
@@ -1990,7 +1990,7 @@ $('ul[data-widget=stbFaq]').stbFaq();
     <div class="row">
       <div class="col-xs-12">
         <p>
-          This element was created to "bug" people to accept our cookie usage. This use has been disabled now, but we keep the design element in the web manual, just in case we get another use case where we need an approved design for this kind of notification. 
+          This element was created to "bug" people to accept our cookie usage. This use has been disabled now, but we keep the design element in the web manual, just in case we get another use case where we need an approved design for this kind of notification.
         </p>
 
         <p>
@@ -2595,7 +2595,7 @@ T        </p>
     printer <br />
     <span class="stb-sprite-small printer"></span>
     <span class="stb-sprite-medium printer"></span>
-  </p>  
+  </p>
 
 </div>
 <div class="col-md-4">
@@ -3072,6 +3072,39 @@ T        </p>
   </div>
 </div>
 
+<h3>Shopping chart:</h3>
+
+<script>
+  window.showCartIcon = true;
+  var setDummyCookie = function(){
+    document.cookie ="cartId=123"
+    document.cookie ="cartCount=4"
+  }
+  var deleteDummyCookie = function() {
+      document.cookie = 'cartId=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      document.cookie = 'cartCount=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  };
+</script>
+<div class="row">
+  <div class="col-md-12">
+    <p>
+      To use the shopping cart set window.showCartIcon = true; in your code and it will appear at the top right corner og the window. You have to have the cookies "cartId" and "cartCount" set.
+    <p>
+
+      <h4>Demo: </h4>
+      <h5>CAUTION: This will override any existing cart cookies</h5>
+      <p>Demo: Click set cookie to set a dummy cookie, then relaod the page and scroll to the <a href="#" onclick="$('html, body').animate({ scrollTop: 0}, 500); return false;">top.</a>
+      (Remember to delete the dummy when done)
+    </p>
+    <button class="stb-btn transparent light" onclick=setDummyCookie()>
+      Set cookie
+    </button>
+    <button class="stb-btn" onclick=deleteDummyCookie()>
+      Remove cookie
+    </button>
+  </div>
+</div>
+
 <h3>Icons with text</h3>
 
 <div class="row">
@@ -3168,7 +3201,7 @@ T        </p>
     <p>Width and height 284px</p>
     <strong class="top-margin-20">Code:</strong>
 <pre class="prettyprint">
-&lt;span class="stb-color-sprite-big warning"&gt;&lt;/span&gt;</pre>    
+&lt;span class="stb-color-sprite-big warning"&gt;&lt;/span&gt;</pre>
     <span class="stb-color-sprite-big warning"></span>
   </div>
 </div>
