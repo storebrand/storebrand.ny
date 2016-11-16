@@ -610,7 +610,7 @@ var idValidatorCorporate = {
 };
 
 function getCartUrl() {
-  var path = '/utsjekk/#/cart';
+  var path = '/utsjekk/#/cart/';
   if (window.location.hostname === 'localhost') {
     return path;
   }
