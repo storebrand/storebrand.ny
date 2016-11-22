@@ -414,7 +414,7 @@ function listFunds(fundsArray, tableTitle, insertWhere, showSustainability, show
     } else if(fundsArray[0]=="index") {
       fundsArray = ["NO0010297328", "NO0010611148", "NO0010611130", "NO0010704265"];
     } else if(fundsArray[0]=="interest") {
-      fundsArray = ["NO0010625734", "NO0010625742", "NO0010283021", "NO0010588031", "NO0010033053", "NO0008000957", "NO0008000858"];
+      fundsArray = ["NO0010625734", "NO0010625742", "NO0010283021", "NO0010588031", "NO0010033053", "NO0008000957", "NO0008000858", "NO0010076417"];
     }
 
     var insertionPoint = $(insertWhere);
@@ -446,7 +446,12 @@ function listFunds(fundsArray, tableTitle, insertWhere, showSustainability, show
               var thirtysixMonths = json[i].Return.ThreeYears;
               var sixtyMonths = json[i].Return.FiveYears;
               var sustainability = json[i].SustainabilityRating;
-              var risk = json[i].Details.InvestmentRisk;
+              var risk = "";
+              if(json[i].Details == undefined || json[i].Details == null || json[i].Details.InvestmentRisk == undefined || json[i].Details.InvestmentRisk == null) {
+                risk = "ukjent";
+              } else {
+                risk = json[i].Details.InvestmentRisk;
+              }
 
               addToTable( ISIN, legalName, morningstarId, closingPriceDate, thisYear, thirtysixMonths, sixtyMonths, sustainability, risk, buyability, showSustainability, showRisk, strippedInsertWhere);
             }
