@@ -611,7 +611,8 @@ var idValidatorCorporate = {
 
 function getCartUrl() {
   var path = '/utsjekk/#/cart/';
-  if (window.location.hostname === 'localhost') {
+  var hostname = window.location.hostname;
+  if (hostname === 'localhost' || /^((client(-(u|t|ts))?)|(t|u|pr|ts))\.stb\.intra$/.test(hostname)) {
     return path;
   }
   var subHost = window.location.hostname.split('.')[0];
@@ -620,11 +621,10 @@ function getCartUrl() {
     return env ? '-' + env : '';
   }
   var getOrderClientHost = function() {
-    return location.hostname.indexOf('.storebrand.no') > 0
-      ? 'www' + getOptionalEnv() + '.storebrand.no'
-      : 'client' + getOptionalEnv() + '.stb.intra';
+    return 'www' + getOptionalEnv() + '.storebrand.no';
   }
   return location.protocol + '//' + getOrderClientHost() + path;
+
 }
 
 //Adds cartIcon if cartCount cookie is found
