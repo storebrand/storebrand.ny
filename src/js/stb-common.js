@@ -505,7 +505,7 @@ function addToTable(fundISIN, fundName, securityId, fundPriceDate, fundThisYear,
     sustainabilityRating = "0";
   }
 
-  var showSustainabilityRating = '<img src=\"https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus' + sustainabilityRating + '.png\" style=\"width: 80px;\" alt=\"Bærekraftsnivå: ' + sustainabilityRating + '\">';
+  var showSustainabilityRating = '<img src=\"https://elements.storebrand.no/storebrand.ny/0.94/images/scales/sus' + sustainabilityRating + '.png\" style=\"width: 80px;\" alt=\"Bærekraftsnivå: ' + sustainabilityRating + ' av 10\">';
   if(sustainTable==="show") {
     showSustainabilityRating = '<td class=\"hidden-xs\" data-sort-value=\"' + sustainabilityRating + '\">' + showSustainabilityRating + '</td>';
   } else {
