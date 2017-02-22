@@ -58,7 +58,7 @@
    var cartCount = readCookie("cartCount");
    // seatbelt: window.showCartIcon might not be defined:
    if(window.hasOwnProperty('showCartIcon')){
-    if (cartCount != null && showCartIcon === true) {
+    if (cartCount != null && showCartIcon === true && cartCount != 0) {
         addCartBtn(cartCount);
       }
     }
