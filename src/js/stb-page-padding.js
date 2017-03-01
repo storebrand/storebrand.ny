@@ -308,8 +308,6 @@
       function () {
         $(this).find('a').removeClass('link-lookalike-fake-hover');
       });
-
-    $('.stbcolor-secondary.sixth .stb-box.mini,.stbcolor-secondary.sixth .stb-box.big').css('background-color', '#fff');
   });
 
 
