@@ -165,34 +165,18 @@
   // Opens the href in the rel-attribute to the clickable class
   // DS-1425 make containers with only one link clickable, remove clickable class when more
   $(document).ready(function () {
-    $(".clickable").each(function (index, elem) {
-      var locallinks = $(elem).find("a");
-      if (locallinks.size() == 1) {
-        elem.click(function () {
-          var link = $(this).find("a").first();
-          if (link.attr("target") === '_blank') {
-            window.open(link.attr("rel"));
-          } else {
-            window.document.location = link.attr("rel");
-          }
-        });
-        $(elem).mouseenter(function () {
-          $(this).find('a').css('color', '#DA291C');
-          $(this).find('a').css('border-color', '#DA291C');
-        });
-        $(elem).mouseleave(function () {
-          $(this).find('a').css('color', '#404040');
-          $(this).find('a').css('border-color', '#404040');
-        });
-        locallinks.click(function () {
-          $(this).preventDefault();
-          //Do nothing, as the clickable will handle this click.
-        });
+    $(".clickable.stb-box.big").each(function (index, elem) {
+      if ($(elem).find("a").size() > 1) $(this).removeClass('clickable');
+    });
+    $(".clickable").click(function () {
+      if ($(this).find("a").first().attr("target") === '_blank') {
+        window.open($(this).attr("rel"));
       } else {
-        if (locallinks.size() > 1) {
-          $(this).not('tr').removeClass('clickable');
-        }
+        window.document.location = $(this).attr("rel");
       }
+    }).find("a").click(function () {
+      $(this).preventDefault();
+      //Do nothing, as the clickable will handle this click.
     });
   });
 
@@ -309,16 +293,21 @@
   // End Adjustments to Bootstraps Modal window
 
   // Script to highlight anchor tags in mini and big boxes on mouseenter
-  $("document").ready(function() {
-    $( ".mini" ).mouseenter(function() {
-      $(this).find('a').css('color', '#DA291C');
-      $(this).find('a').css('border-color', '#DA291C');
-    });
-    $( ".mini" ).mouseleave(function() {
-      $(this).find('a').css('color', '#404040');
-      $(this).find('a').css('border-color', '#404040');
-    });
-
+  $("document").ready(function () {
+    $(".stb-box.mini").mouseenter(
+      function () {
+        $(this).find('a').addClass('link-lookalike-fake-hover');
+      }).mouseleave(
+      function () {
+        $(this).find('a').removeClass('link-lookalike-fake-hover');
+      });
+    $(".stb-box.big.clickable").mouseenter(
+      function () {
+        $(this).find('a').addClass('link-lookalike-fake-hover');
+      }).mouseleave(
+      function () {
+        $(this).find('a').removeClass('link-lookalike-fake-hover');
+      });
 
     $('.stbcolor-secondary.sixth .stb-box.mini,.stbcolor-secondary.sixth .stb-box.big').css('background-color', '#fff');
   });
