@@ -163,18 +163,36 @@
 
 
   // Opens the href in the rel-attribute to the clickable class
-  $(document).ready(function($) {
-    $(".clickable").click(function() {
-      if ($(this).find("a").first().attr("target") === '_blank') {
-        window.open($(this).attr("rel"));
+  // DS-1425 make containers with only one link clickable, remove clickable class when more
+  $(document).ready(function () {
+    $(".clickable").each(function (index, elem) {
+      var locallinks = $(elem).find("a");
+      if (locallinks.size() == 1) {
+        elem.click(function () {
+          var link = $(this).find("a").first();
+          if (link.attr("target") === '_blank') {
+            window.open(link.attr("rel"));
+          } else {
+            window.document.location = link.attr("rel");
+          }
+        });
+        $(elem).mouseenter(function () {
+          $(this).find('a').css('color', '#DA291C');
+          $(this).find('a').css('border-color', '#DA291C');
+        });
+        $(elem).mouseleave(function () {
+          $(this).find('a').css('color', '#404040');
+          $(this).find('a').css('border-color', '#404040');
+        });
+        locallinks.click(function () {
+          $(this).preventDefault();
+          //Do nothing, as the clickable will handle this click.
+        });
       } else {
-        window.document.location = $(this).attr("rel");
+        if (locallinks.size() > 1) {
+          $(this).not('tr').removeClass('clickable');
+        }
       }
-    });
-
-    $(".clickable a").click(function(e) {
-      e.preventDefault();
-      //Do nothing, as the clickable will handle this click.
     });
   });
 
@@ -300,14 +318,7 @@
       $(this).find('a').css('color', '#404040');
       $(this).find('a').css('border-color', '#404040');
     });
-    $( ".big" ).mouseenter(function() {
-      $(this).find('a').css('color', '#DA291C');
-      $(this).find('a').css('border-color', '#DA291C');
-    });
-    $( ".big" ).mouseleave(function() {
-      $(this).find('a').css('color', '#404040');
-      $(this).find('a').css('border-color', '#404040');
-    });
+
 
     $('.stbcolor-secondary.sixth .stb-box.mini,.stbcolor-secondary.sixth .stb-box.big').css('background-color', '#fff');
   });
