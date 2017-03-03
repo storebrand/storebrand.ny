@@ -166,7 +166,7 @@
   // DS-1425 make containers with only one link clickable, remove clickable class when more
   $(document).ready(function () {
     $(".clickable.stb-box.big").each(function (index, elem) {
-      if ($(elem).find("a").size() > 1) $(this).removeClass('clickable');
+      if ($(elem).find("a").size() != 1) $(this).removeClass('clickable');
     });
     $(".clickable").click(function () {
       if ($(this).find("a").first().attr("target") === '_blank') {
