@@ -20,10 +20,15 @@
 
   }
 
+  function toggleTocLinks(listselector) {
+    var list = (listselector !== undefined) ? listselector : '.toc-list';
+    $(list + ' .items').slideToggle();
+    $(list + ' p span').toggleClass('chevron-down red chevron-up');
+  }
+
   $(document).ready(function() {
     // Prepare the row that contains the table of contents
-    var tocList ='<div class="row"><div class="col-md-8 toc-list top-padding-10 border-top-and-bottom stbcolor-background fifth"><p class="intro"><a href="#" onclick="$(\'.toc-list .items\').slideToggle();$(\'.toc-list p span\').toggleClass(\'chevron-down red chevron-up\');return false;">G&aring; direkte til<span class="stb-sprite-medium chevron-down pull-right"></a></span></p><ul class="items"></ul></div></div>';
-
+    var tocList ='<div class="row"><div id="toc-list" class="col-md-8 toc-list top-padding-10 border-top-and-bottom stbcolor-background fifth"><p class="intro"><a class="toc-list-link" href="#toc-list">G&aring; direkte til<span class="stb-sprite-medium chevron-down pull-right"></a></span></p><nav><ul class="items"></ul></nav></div></div>';
     // Place the table of content above the first hx.toc-header
     if($('h2.toc-header:not(.toc-hidden)').length===0) {
       $(tocList).insertBefore( $('h3.toc-header:not(.toc-hidden):first').closest("div.row") );
@@ -31,6 +36,13 @@
       // When we don't have to support h3-based toc any more, we can replace this if sentence with just the following line
       $(tocList).insertBefore( $('h2.toc-header:not(.toc-hidden):first').closest("div.row") );
     }
+    $('.toc-list .intro').click(function(){
+      toggleTocLinks();
+      return false;
+    });
+    //when js is minified into one file, the on('stb-post-insert',...) method might end up in a race condition.
+    //handler should be defined after loading of jquery but before loading of application js like this one.
+    $('.toc-list').trigger('stb-post-insert');
 
     // Find all the top level TOC headings (h2)
     var tocHeaders= $('h2.toc-header:not(.toc-hidden)');

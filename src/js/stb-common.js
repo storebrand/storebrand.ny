@@ -20,8 +20,8 @@ function scrollToHash(hash) {
     }
     $('html,body').animate({ scrollTop: scrollToPosition }, 1000);
     // Highlighting the clicked heading for a brief period to make it easier to see what just happened.
-    $(target).animate({backgroundColor:"#FFF0F0"},1000);
-    $(target).animate({backgroundColor:"#FFFFFF"},1000);
+    $(target).not('div').animate({backgroundColor:"#FFF0F0"},1000);
+    $(target).not('div').animate({backgroundColor:"#FFFFFF"},1000);
   }
 }
 

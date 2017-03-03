@@ -20,11 +20,13 @@
 
   <!-- Stuff just for the web manual... -->
   <script type="text/javascript" src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <script type="text/javascript">
+    $(document).on('stb-post-insert', '.toc-list', function(event){
+      $('.toc-list .intro').trigger('click');
+    });
+  </script>
 
   <style type="text/css">
-    .toc-list ul.items {
-      display: block;
-    }
     .toc-list ul.items>li {
    	  float: left;
  	  margin-right: 20px;
@@ -987,7 +989,7 @@ $(document).ready(function() {
       <div class="col-md-10">
         <ul class="stb-list-group">
           <li class="list-group-item header">Lorem ipsum</li>
-          <li class="list-group-item clickable analyze" rel="">Terra scriptum delta echo verso grimt delta scriptum sierra alpha verso grimt delta scriptum sierra alpha verso grimt delta scriptum grimt delta scriptum sierra alpha verso grimt delta scriptum sierra </li>
+          <li class="list-group-item clickable analyze" rel="listgroup">Terra scriptum delta echo verso grimt delta scriptum sierra alpha verso grimt delta scriptum sierra alpha verso grimt delta scriptum grimt delta scriptum sierra alpha verso grimt delta scriptum sierra </li>
           <li class="list-group-item header">Alpha echo</li>
           <li class="list-group-item"> Sierra alpha terra scriptum delta echo verso grimt delta <a href="#">webmanual</a> sierra alpha verso grimt delta scriptum sierra alpha verso grimt delta scriptum sierra alpha terra scriptum delta echo verso grimt delta scriptum sierra alpha verso grimt delta scriptum sierra alpha verso grimt delta scriptum sierra alpha terra</li>
           <li class="list-group-item header">Post Scriptum</li>
