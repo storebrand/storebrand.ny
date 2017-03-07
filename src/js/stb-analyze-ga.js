@@ -6,11 +6,7 @@ $(document).ready(function() {
 
   // Analytics for menu usage
   $("ul.dropdown-menu a,a.dropdown-toggle").bind( "click", function() {
-    debugger;
-    // var aLinkTekst = $(this).text().trim();
-    var cloned = $(this).clone();
-    cloned.find('span').remove();
-    var aLinkTekst = cloned.html().trim();
+    var aLinkTekst = $(this).text().trim();
     var path = window.location.pathname;
     ga('send', 'event', path , 'Klikk i meny', aLinkTekst);
   });
