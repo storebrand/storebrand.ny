@@ -10,7 +10,7 @@ $(document).ready(function() {
     // var aLinkTekst = $(this).text().trim();
     var cloned = $(this).clone();
     cloned.find('span').remove();
-    var aLinkTekst = cloned.html().trim()
+    var aLinkTekst = cloned.html().trim();
     var path = window.location.pathname;
     ga('send', 'event', path , 'Klikk i meny', aLinkTekst);
   });
