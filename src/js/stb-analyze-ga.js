@@ -5,19 +5,14 @@
 $(document).ready(function() {
 
   // Analytics for menu usage
-  $("ul.dropdown-menu a").bind( "click", function() {
-    var aLinkDescribed = $(this).html();
-    if (aLinkDescribed.indexOf("<span") > 0 ) {
-      var spanStart = $(this).html().indexOf("</span>");
-      aLinkDescribed = aLinkDescribed.substring(spanStart, aLinkDescribed.length);
-      if (aLinkDescribed.indexOf("<span") > 0 ) {
-        spanStart = $(this).html().indexOf("<span");
-        spanEnd = $(this).html().indexOf("</span>");
-        aLinkDescribed = aLinkDescribed.substring(spanStart, spanEnd);
-      }
-    }
+  $("ul.dropdown-menu a,a.dropdown-toggle").bind( "click", function() {
+    debugger;
+    // var aLinkTekst = $(this).text().trim();
+    var cloned = $(this).clone();
+    cloned.find('span').remove();
+    var aLinkTekst = cloned.html().trim()
     var path = window.location.pathname;
-    ga('send', 'event', path , 'Klikk i meny', aLinkDescribed);
+    ga('send', 'event', path , 'Klikk i meny', aLinkTekst);
   });
 
   // Analytics for footer menu items usage
