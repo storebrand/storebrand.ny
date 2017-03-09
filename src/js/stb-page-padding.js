@@ -174,8 +174,8 @@
       } else {
         window.document.location = $(this).attr("rel");
       }
-    }).find("a").click(function () {
-      $(this).preventDefault();
+    }).find("a").click(function (event) {
+      event.preventDefault();
       //Do nothing, as the clickable will handle this click.
     });
   });
