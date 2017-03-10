@@ -546,23 +546,33 @@
       var elementId = $(this).attr('data-element-id');
       var chatStatusUrl = $('#chat-status').attr('data-url');
       if (chatStatusUrl !== '' && contentKey !== null) {
-        $.getJSON(chatStatusUrl + '?key=' + contentKey, function(chatData) {
-          if (chatData.status === 'true') {
-            try {
-              $(contactElement).openChat();
-            } catch (e) {
-              return true;
+        $.ajax({
+          url: chatStatusUrl + '?key=' + contentKey,
+          async: false,
+          dataType: "json",
+          data: {},
+          success: function (chatData) {
+            if (chatData.status === 'true') {
+              try {
+                $(contactElement).openChatResponsive();
+                event.preventDefault();
+              } catch (e) {
+                return true;
+              }
+            } else {
+              $(contactElement).removeAttr('href').removeClass('open').addClass('closed');
+              $(contactElement).next().children().text(chatData.text);
+              var icon = $(contactElement).children('.circle-16');
+              $(icon).removeClass("stbcolor-secondary");
+              $(icon).addClass("stbcolor-gray");
+              event.preventDefault();
             }
-          } else {
-            $(contactElement).removeAttr('href').removeClass('open').addClass('closed');
-            $(contactElement).next().children().text(chatData.text);
-            var icon = $(contactElement).children('.circle-16');
-            $(icon).removeClass("stbcolor-secondary");
-            $(icon).addClass("stbcolor-gray");
+          },
+          error: function () {
+            contactElement.attr('target','_blank');
           }
         });
-      }
-      event.preventDefault();
+      };
     });
   });
 
