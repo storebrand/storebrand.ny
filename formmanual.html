@@ -936,7 +936,13 @@
       <div class="col-xs-9 col-md-12 slider">
         <form>
           <div class="stb-form-group top-margin-10">
-            <input id="stb-slider" type="slider" name="stb-slider" value="0" />
+            <label for="stb-slider">Slider Label</label>
+            <div class="col-xs-12 col-sm-3 col-md-2 stb-form-group slider-text-wrapper">
+              <input class="text-center rangeTextInput" type="number" value="50"/>
+            </div>
+            <div class="col-xs-12 col-sm-7 col-md-10">
+              <input id="stb-slider" class="slider-html" type="range" min="0" max="100" value="50">
+            </div>
           </div>
         </form>
       </div>
@@ -945,13 +951,19 @@
       <div class="col-md-12">
         
          <pre class="prettyprint">
-&lt;div class="col-xs-9 col-md-12 slider"&gt;
- &lt;form&gt;
-   &lt;div class="stb-form-group top-margin-10"&gt;
-     &lt;input id="stb-slider" type="slider" name="stb-slider" value="0" /&gt;
-   &lt;/div&gt;
- &lt;/form&gt;
-&lt;/div&gt;</pre>
+           &lt;div class=&quot;col-xs-9 col-md-12 slider&quot;&gt;
+             &lt;form&gt;
+               &lt;div class=&quot;stb-form-group top-margin-10&quot;&gt;
+                 &lt;label for=&quot;stb-slider&quot;&gt;Slider Label&lt;/label&gt;
+                 &lt;div class=&quot;col-xs-12 col-sm-3 col-md-2 stb-form-group slider-text-wrapper&quot;&gt;
+                   &lt;input class=&quot;text-center rangeTextInput&quot; type=&quot;number&quot; value=&quot;50&quot;/&gt;
+                 &lt;/div&gt;
+                 &lt;div class=&quot;col-xs-12 col-sm-7 col-md-10&quot;&gt;
+                   &lt;input id=&quot;stb-slider&quot; class=&quot;slider-html&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;100&quot; value=&quot;50&quot;&gt;
+                 &lt;/div&gt;
+               &lt;/div&gt;
+             &lt;/form&gt;
+           &lt;/div&gt;</pre>
         <p><br /><strong>Note</strong>: Our slider is based on Egorkhmelev's jslider (see <a href="https://github.com/egorkhmelev/jslider">GitHub</a>for code with more options), stripped down and with a few improvements:</p>
         <ul>
           <li>Self-contained JS-file, all dependencies are included at the top of the file.</li>
