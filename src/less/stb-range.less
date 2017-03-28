@@ -1,0 +1,95 @@
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: -0.35px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 25px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  background: rgb(230, 230, 230);
+  border-radius: 0px;
+  border: 0px solid rgba(1, 1, 0, 0);
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
+  border: 1.8px solid #ffffff;
+  height: 25px;
+  width: 25px;
+  border-radius: 50px;
+  background: rgba(113, 148, 29, 0.95);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: 0.35px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: rgba(54, 126, 189, 0.16);
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 25px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  background: rgb(230, 230, 230);
+  border-radius: 25px;
+  border: 0px solid rgba(1, 1, 0, 0);
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
+  border: 1.8px solid #ffffff;
+  height: 25px;
+  width: 25px;
+  border-radius: 50px;
+  background: rgba(113, 148, 29, 0.95);
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 200%;
+  height: 25px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: rgba(42, 100, 149, 0.16);
+  border: 0px solid rgba(1, 1, 0, 0);
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-fill-upper {
+  background: rgb(230, 230, 230);
+  border: 0px solid rgba(1, 1, 0, 0);
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
+  border: 1.8px solid #ffffff;
+  width: 25px;
+  border-radius: 50px;
+  background: rgba(113, 148, 29, 0.95);
+  cursor: pointer;
+  height: 25px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: rgb(230, 230, 230);
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: rgb(230, 230, 230);
+}
+
+/*end of style from http://danielstern.ca/range.css*/
+
+.rangeTextInput{
+  float: left;
+  width: 80px !important;
+}
+
+form .stb-form-group input.slider-html{
+  width: 100%;
+}
