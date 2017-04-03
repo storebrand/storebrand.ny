@@ -31,6 +31,7 @@ module.exports = function(grunt) {
               './src/js/stb-common.js',
               './src/js/stb-page-padding.js',
               './src/js/stb-video.js',
+              './src/js/stb-range-slider.js',
               './src/js/bootstrapValidator-0.5.3.js',
 
               // './node_modules/moment/moment.js',
