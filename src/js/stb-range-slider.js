@@ -27,11 +27,11 @@ $(document).ready(function() {
   });
 
   $(sliderTextSelector).on("change click mouseup", function(event) {
-    var age = $(this).val();
-    if(age<slidermin){
+    var value = $(this).val();
+    if(value<slidermin){
       $(this).val(slidermin);
     }
-    if(age> slidermax){
+    if(value> slidermax){
       $(this).val(slidermax);
     }
     slider.val( $(sliderTextSelector).val());
