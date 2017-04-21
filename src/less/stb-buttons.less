@@ -140,19 +140,23 @@ a.stb-btn:visited {
   &.stb-big-btn:hover, &.stb-big-btn:active, &.stb-big-btn:focus {
 	background-color: @stb-secondary-forest-darker;
   }
+  /*End stb-big-btn */
 
-/*End stb-big-btn */
+  /* styling for disabled buttons */
   &.disabled {
-    background-color: @stb-gray-fourth;
+    background-color: @stb-gray-fifth;
+    color: @stb-gray-second;
     cursor: not-allowed;
     opacity: 1;
     &:hover, &:active, &:focus {
-      // No change for disabled buttons
+      // override BS default hover styles
+      background-color: @stb-gray-fifth;
+      color: @stb-gray-second;
     }
-    color: @stb-gray-second;
+    color: #eee;
     &.transparent{
       background:transparent;
-      color: @stb-gray-fourth;
+      color: #777;
     }
 
     &.stb-big-btn{
@@ -164,6 +168,7 @@ a.stb-btn:visited {
   }
 
 } /* End stb.btn */
+
 
 /* Medium devices (tablets, 992px and up) */
 @media (min-width: @screen-md-min) {
