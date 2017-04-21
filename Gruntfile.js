@@ -105,6 +105,19 @@ module.exports = function(grunt) {
         expand: true,
         src: './data/**',
         dest: './public/'
+      },
+      // some files are referenced directly from webmanual, like js/src/demo-datepicker.js
+      sourceJS: {
+        expand: true,
+        cwd: './src/js/',
+        src: '**',
+        dest: './public/js/src/'
+      },
+      momentJS: {
+        expand: true,
+        cwd: './node_modules/moment/min/',
+        src: 'moment.min.js',
+        dest: './public/js/src/'
       }
     },
 
