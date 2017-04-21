@@ -9,6 +9,20 @@
   <!-- Full list of elements needed for web manual, non-optimized -->
   <link rel="stylesheet" type="text/css" href="css/stb-all-webmanual.min.css">
   <script type="text/javascript" src="js/stb-all.min.js"></script>
+  
+  <!-- datepicker requirements -->
+  <script type="text/javascript" src="js/src/moment.min.js"></script>
+  <script type="text/javascript" src="js/src/bootstrap-datetimepicker.min.js"></script>
+  <script type="text/javascript" src="js/src/bootstrap-datetimepicker.nb.js"></script>
+
+  <!-- slider -->
+  <script type="text/javascript" src="js/src/jquery.slider.all.js"></script>
+
+  <!-- chosen autocomplete jq plug -->
+  <script type="text/javascript" src="js/src/chosen.jquery.js"></script>
+
+  <script type="text/javascript" src="js/src/webmanual.core.js"></script>
+  <script type="text/javascript" src="js/src/formmanual.core.js"></script>
   <!-- End of full list of elements needed for web manual, non-optimized -->
 
   <!-- Stuff just for the web manual... -->
@@ -975,7 +989,7 @@
           <strong>Required JS + CSS:</strong>
         </p>
         <ul>
-          <li><a href="javascript/jquery.slider.all.js">jquery.slider.all.js</a></li>
+          <li><a href="js/src/jquery.slider.all.js">jquery.slider.all.js</a></li>
           <li><a href="less/stb-ui-slider.less">stb-ui-slider.less</a></li>
         </ul>
       </div>
@@ -1043,13 +1057,31 @@
         <p>Increasingly, the best choice is to use native form elements. For datepickers, this is doubly so.</p>
         <p>Consider what happens when your datepicker is used on a smart phone, a "smart-TV" or, theoretically, a Windows Phone. Manufacturers of these devices put a lot of work into creating the best possible user experience. Customizing the datepicker will generally obstruct that goal.
         </p>
-    <h3>Datepicker - Bootstrap datepicker, localized for Norway</h3>
+        <h3>Datepicker - Bootstrap datepicker, localized for Norway</h3>
+        <!-- init our datepicker here -->
+        <script>
+        $(document).ready(function(){
+          if($('.datePicker').length > 0){
+            $('.datePicker').datetimepicker(
+                {
+                  language: 'nb',
+                  pickTime: false,
+                  icons: {
+                    date: ''
+                  }
+                }
+            );
+          }
+        });
+        </script>
         <form>
           <div class="stb-form-group al dateContainer">
-            <label>Date</label>
+            <label for="datepicker01">Date</label>
             <div class='input-group date datePicker analyze' data-date-format="DD/MM/YYYY">
-              <input type='text' class="form-control" name="dateTravelTo"/>
-              <span class="input-group-addon stbcolor-secondary third"><span class="stb-sprite-small white calendar"></span></span>
+              <input type="text" class="form-control" name="dateTravelTo" id="datepicker01" aria-label="Datoformat: DD.MM.YYYY"/>
+              <span class="input-group-addon stbcolor-secondary third">
+                <span class="stb-sprite-small white calendar"></span>
+              </span>
             </div>
           </div>
         </form>
@@ -1064,20 +1096,20 @@
  &lt;/div&gt;
 &lt;/form&gt;</pre>
       <p>
-        Documentation can be found on the website for the <a href="http://eonasdan.github.io/bootstrap-datetimepicker/">datetimepicker</a>. <br> See <a href="js/src/demo-datepicker.js">javascript-code</a> for usage instructions.
+        Documentation can be found on the website for the <a href="http://eonasdan.github.io/bootstrap-datetimepicker/">datetimepicker</a>. <br> See <a href="https://jsfiddle.net/nilsel/5gfw7q81/">this example</a> for usage instructions.
       </p>
       <p>
-        <strong>Note</strong>: Requires JavaScript inclusion of <a href="javascript/bootstrap-datetimepicker.min.js">Bootstrap datetime picker v.3</a>, <a href="javascript/moment.min.js">Moment 2.8.3</a> and the Norwegian <a href="javascript/bootstrap-datetimepicker.nb.js">localization</a>
+        <strong>Note</strong>: Requires JavaScript inclusion of <a href="js/src/bootstrap-datetimepicker.min.js">Bootstrap datetime picker v.3</a>, <a href="js/src/moment.min.js">Moment 2.8.3</a> and the Norwegian <a href="js/src/bootstrap-datetimepicker.nb.js">localization</a>
       </p>
 
       <p>
         With validation:</p>
           <form id="validateDate" class="stb-form validateForm">
-            <label>Date</label>
+            <label for="datepicker02">Date</label>
             <span id="date-message" class="help-block"></span>
             <div class="stb-form-group al dateContainer">
               <div class='input-group date datePicker' data-date-format="DD/MM/YYYY">
-                <input type='text' class="form-control" name="date"/>
+                <input type='text' class="form-control" name="date" id="datepicker02"/>
                 <span class="input-group-addon stbcolor-secondary third"><span class="stb-sprite-small white calendar"></span></span>
               </div>
             </div>
