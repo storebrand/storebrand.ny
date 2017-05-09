@@ -63,11 +63,20 @@ $("document").ready(function () {
     $(".stb-progress div[data-widget=progressExample]").css({
       width: a + "%"
     });
-  }), $("#demo-popover").popover(), $("#demo-a-popover").popover(), $("select[data-widget=chosenSelect]").chosen(), $("select.stb-select").customSelectMenu({
+  }), $("#demo-popover").popover(), $("#demo-a-popover").popover(),
+    $("select[data-widget=chosenSelect]").chosen(),
+    function () {
+    //TODO:is this used?
+    if ($("select.stb-select").customSelectMenu != undefined) {
+      $("select.stb-select").customSelectMenu({
         menuClass: "stb-select"
-  }), $("input[name=customStyleSelect]").on("change", function() {}), $(".color-swatch").each(function() {
-    var a = $(this).css("background-color"),
-    b = hexc(a).toUpperCase();
+      })
+    }
+  }
+    ,
+    $("input[name=customStyleSelect]").on("change", function () {
+  }), $(".color-swatch").each(function () {
+    var a = $(this).css("background-color"), b = hexc(a).toUpperCase();
     $(this).append('<div class="color-code">' + b + "</div>");
   })
 });
