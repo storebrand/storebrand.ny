@@ -15,9 +15,6 @@
   <script type="text/javascript" src="js/src/bootstrap-datetimepicker.min.js"></script>
   <script type="text/javascript" src="js/src/bootstrap-datetimepicker.nb.js"></script>
 
-  <!-- slider -->
-  <script type="text/javascript" src="js/src/jquery.slider.all.js"></script>
-
   <!-- chosen autocomplete jq plug -->
   <script type="text/javascript" src="js/src/chosen.jquery.js"></script>
 
@@ -933,7 +930,6 @@
 <div class="row"><!-- Sliders row -->
   <div class="col-md-3">
     <h2 class="toc-header">Sliders</h2>
-    (Not finished, but you can start using it anyway. Please consult storebrand.ny project.)
   </div>
   <div class="col-md-9">
     <div class="row">
@@ -951,10 +947,10 @@
         <form>
           <div class="stb-form-group top-margin-10">
             <label for="stb-slider">Slider Label</label>
-            <div class="col-xs-12 col-sm-3 col-md-2 stb-form-group slider-text-wrapper">
+            <div class="col-xs-12 col-sm-3 col-md-2 stb-form-group stb-slider-text-wrapper">
               <input id="stb-slider-text" class="text-center rangeTextInput" type="number" value="50"/>
             </div>
-            <div class="col-xs-12 col-sm-7 col-md-10">
+            <div class="col-xs-12 col-sm-7 col-md-10 stb-slider-wrapper">
               <input id="stb-slider" class="slider-html" type="range" min="0" max="100" value="50">
             </div>
           </div>
@@ -978,20 +974,6 @@
                &lt;/div&gt;
              &lt;/form&gt;
            &lt;/div&gt;</pre>
-        <p><br /><strong>Note</strong>: Our slider is based on Egorkhmelev's jslider (see <a href="https://github.com/egorkhmelev/jslider">GitHub</a>for code with more options), stripped down and with a few improvements:</p>
-        <ul>
-          <li>Self-contained JS-file, all dependencies are included at the top of the file.</li>
-          <li>Improvements &amp; some pull-requests have been included (resize, redraw-functions ++)</li>
-          <li>Minor edits to the markup template</li>
-          <li>Customized styles/graphics</li>
-        </ul>
-        <p>
-          <strong>Required JS + CSS:</strong>
-        </p>
-        <ul>
-          <li><a href="js/src/jquery.slider.all.js">jquery.slider.all.js</a></li>
-          <li><a href="less/stb-ui-slider.less">stb-ui-slider.less</a></li>
-        </ul>
       </div>
     </div>
   </div>

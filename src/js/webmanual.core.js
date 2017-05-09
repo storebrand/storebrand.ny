@@ -64,50 +64,6 @@ $(document).ready(function(){
 });
 
 
-$(document).ready(function() {
-  var sliderObj = {
-    from: 0,
-    to: 100,
-    domNode: "#stb-slider",
-    valueElem: "#stb-slider-value",
-    calculate: function(a) {
-      return $(this.domNode).siblings(this.valueElem).val(a), a;
-    },
-    complete: function() {},
-    onstatechange: function() {
-      var a = $(this.domNode).find(".jslider-bg .l"),
-          b = $(this.domNode).find(".jslider-bg .r"),
-          c = $(this.domNode).find(".jslider-pointer");
-      if (c && c.length > 0) {
-        var d = c[0].style.left.split("%")[0],
-            e = 100 - d;
-        a.css({
-          width: d + "%"
-        }),
-        b.css({
-          width: e + "%",
-          left: d + "%"
-        });
-      }
-    },
-    getPercentVal: function(a) {
-      var b = a,
-          c = 0,
-          d = 100;
-      if (b && b.length > 0) {
-        var e = b[0].style.left.split("%")[0];
-            c = e,
-            d = 100 - c;
-      }
-      return d;
-    }
-  };
-  var sliderEl = $("#stb-slider");
-  if(sliderEl.length > 0){
-    initiateSlider(sliderEl, sliderObj, "år", "percent");
-  }
-});
-
 
 $(document).ready(function(){
   if($('#validateDate').length > 0){
