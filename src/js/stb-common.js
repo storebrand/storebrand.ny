@@ -16,7 +16,7 @@ function scrollToHash(hash) {
     var scrollToPosition = target.offset().top;
     // Checking if the navigation header is fixed. If yes, set the scrollto position by subtracting the height of the fixed header
     if($('.navbar-fixed-top').css("display") === "block") {
-      scrollToPosition -= $('.navbar-fixed-top').height();
+      scrollToPosition -= $('.navbar-fixed-top').height() - 1;
     }
     $('html,body').animate({ scrollTop: scrollToPosition }, 1000);
     // Highlighting the clicked heading for a brief period to make it easier to see what just happened.
