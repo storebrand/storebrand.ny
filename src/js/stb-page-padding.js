@@ -635,10 +635,34 @@ function getCartUrl() {
 
 }
 
+
+var stb = stb || {};
+(function(namespace){
+    namespace.cart = {
+      refreshCartCount: function() {
+        var cartCount = readCookie("cartCount");
+        if(window.hasOwnProperty('showCartIcon')){
+          if (cartCount != null && showCartIcon === true && cartCount != 0) {
+              $('#cartCount').html(cartCount);
+            }
+          }
+      },
+      showCart: function() {
+        var cartCount = readCookie("cartCount");
+        if(window.hasOwnProperty('showCartIcon')){
+          if (cartCount != null && showCartIcon === true && cartCount != 0) {
+              addCartBtn(cartCount);
+            }
+          }
+      }
+    }
+
+})(stb);
+
 //Adds cartIcon if cartCount cookie is found
 function addCartBtn(count) {
   var cartUrl = getCartUrl();
-  $('body').prepend('<div class="cartIcon shoppingCartIcon"><a href="'+cartUrl+'"><div class="circle-24 stbcolor-secondary first"><span class="stb-sprite-medium white shopping-cart"></span></div><div class="circle-16 stbcolor-primary first cartNr" style="border-radius:24px;height:24px;width:24px;padding-left:8px;padding-top:2px;"><span class="h2Number">'+count+'</span></div></a></div>');
+  $('body').prepend('<div class="cartIcon shoppingCartIcon"><a href="'+cartUrl+'"><div class="circle-24 stbcolor-secondary first"><span class="stb-sprite-medium white shopping-cart"></span></div><div class="circle-16 stbcolor-primary first cartNr" style="border-radius:24px;height:24px;width:24px;padding-left:8px;padding-top:2px;"><span class="h2Number" id="cartCount">'+count+'</span></div></a></div>');
 }
 
 //Toggle cart show/hide when scrolling
