@@ -110,7 +110,7 @@ var s,search = {
       if (data.url) {
         //Go to the defined URL for the current search keyword
         s.hasURL = true;
-        window.location.href = data.url;
+        window.location.href = encodeURIComponent(data.url);
       }
       $('.typeahead').typeahead('close');
     });
@@ -144,7 +144,7 @@ var s,search = {
   // Remove certain special characters from search, in order to not break the Google search URL
   checkSearch : function (query) {
     //absURL is defined elsewhere so not initialized here again
-    window.location = $('input.searchbox.tt-input.tt-desktop').attr('data-search-url')+"?action=search&q=" + search.stripChars(query);  // link to the search result page
+    window.location = $('input.searchbox.tt-input.tt-desktop').attr('data-search-url')+"?action=search&q=" + encodeURIComponent(search.stripChars(query));  // link to the search result page
   },
   initExtendedSearch : function() {
 
