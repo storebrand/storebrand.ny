@@ -53,7 +53,6 @@ function onPlayerStateChangeBanner(event) {
 function stopVideoBanner(player, btn) {
   if(bootstrapEnv === 'md' || bootstrapEnv === 'lg') {
     player.stopVideo();
-    player.seekTo(0, true);
   }
   var bannerVideo = $(btn).closest('.banner-video');
   bannerVideo.children('.video-container').hide();
