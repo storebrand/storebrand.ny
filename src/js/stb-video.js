@@ -60,6 +60,14 @@ function stopVideoBanner(player, btn) {
   bannerVideo.parent().addClass('top-padding-30');
   var dataLayer = dataLayer||[];
   dataLayer.push({'event' : 'stopYouTubeVideo', 'youTubeTS' : player.getCurrentTime()});
+  var iframeVideos = document.getElementsByTagName("iframe");
+  if (iframeVideos != null) {
+    for (var i = 0; i < iframeVideos.length; i++) {
+      if (iframeVideos[i].src.substring(12,19)=="youtube") {
+        iframeVideos[i].src = iframeVideos[i].src;
+      }
+    }
+  }  
 }
 
 function playVideoBanner(player, btn) {
