@@ -144,7 +144,7 @@ var s,search = {
   // Remove certain special characters from search, in order to not break the Google search URL
   checkSearch : function (query) {
     //absURL is defined elsewhere so not initialized here again
-    window.location = $('input.searchbox.tt-input.tt-desktop').attr('data-search-url')+"?action=search&q=" + encodeURIComponent(search.stripChars(query));  // link to the search result page
+    window.location = $('input.searchbox.tt-input.tt-desktop').attr('data-search-url')+"#?action=search&cludoquery=" + encodeURIComponent(search.stripChars(query));  // link to the search result page
   },
   initExtendedSearch : function() {
 
@@ -392,7 +392,7 @@ var s,search = {
       if($(xml).find("R").length===0 && $(xml).find("Spelling").length > 0){
         $(xml).find("Spelling").each(function() {
           var suggestedSpelling = $(this).find("Suggestion").attr("q");
-          $(".resultsummary div").append('<div id="suggestion"' + '>Vi har f&aring; eller ingen treff p&aring; det s&oslash;keordet, men pr&oslash;v <a href="?action=search&q=' + suggestedSpelling + '">' + suggestedSpelling + '<' + '/a>.<' + '/div>');
+          $(".resultsummary div").append('<div id="suggestion"' + '>Vi har f&aring; eller ingen treff p&aring; det s&oslash;keordet, men pr&oslash;v <a href="#?action=search&cludoquery=' + suggestedSpelling + '">' + suggestedSpelling + '<' + '/a>.<' + '/div>');
           noresult= true;
         });
       }
