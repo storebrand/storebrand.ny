@@ -17,7 +17,7 @@ function onYouTubeIframeAPIReady() {
   $('.video-player-banner').each(function(index, element){
     new YT.Player($(element).attr('id'), {
       videoId: $(element).attr('data-youtube-id'),
-      playerVars: { autohide:1, modestbranding: 1, controls: 1,theme:'light',html5:1, showinfo:0, rel:0},
+      playerVars: { autohide:1, modestbranding: 0, controls: 1,theme:'light',html5:1, showinfo:0, rel:0},
       events: {
         'onReady': onPlayerReadyBanner,
         'onStateChange': onPlayerStateChangeBanner
@@ -28,7 +28,7 @@ function onYouTubeIframeAPIReady() {
   $('.video-player-inline').each(function(index, element) {
     new YT.Player($(element).attr('id'), {
       videoId: $(element).attr('data-youtube-id'),
-      playerVars: { autohide:1, modestbranding: 1, controls: 1,theme:'light',html5:1, showinfo:0, rel:0}
+      playerVars: { autohide:1, modestbranding: 0, controls: 1,theme:'light',html5:1, showinfo:0, rel:0}
     });
   });
 }

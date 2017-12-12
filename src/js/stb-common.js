@@ -4,7 +4,7 @@
  /*
 
  /* ***** SCROLL TO ***** */
-function scrollTo(id,more) {
+function stbScrollTo(id,more) {
   $('html,body').animate({scrollTop: $('#'+id).height()}, 800);
 }
 
