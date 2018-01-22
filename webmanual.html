@@ -712,47 +712,6 @@ $(document).ready(function() {
         </tbody>
       </table>
     </div>
-    <h3 class="top-margin-40">Locked left column Zurb table</h3>
-    <p>
-      You can pin the leftmost column and let the rest be swipe-able, most useful on narrow devices. This table is based on <a href="http://zurb.com/playground/responsive-tables">Zurb</a>
-    </p>
-    <div class="scroll-indicator">Tabellen kan sveipes <img height="24" src="images/PictoScrollTable@2x.gif"/></div>
-    <div class="table-responsive-pinned">
-      <table class="responsive stb-table">
-        <thead>
-        <tr>
-          <th>Aksjefond</th>
-          <th class="text-right">Forvaltningshonorar</th>
-          <th class="text-right">Andre&nbsp;gebyrer</th>
-          <th>Grønnhet</th>
-          <th class="text-right">Risikograd</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>Storebrand&nbsp;Superb</td>
-          <td class="text-right">1,25&nbsp;%</td>
-          <td class="text-right">0</td>
-          <td class="text-right">5</td>
-          <td class="text-right">Lav</td>
-        </tr>
-        <tr>
-          <td>Storebrand&nbsp;Futuristic</td>
-          <td class="text-right">1,50&nbsp;%</td>
-          <td class="text-right">0</td>
-          <td class="text-right">8</td>
-          <td class="text-right">Høy</td>
-        </tr>
-        <tr>
-          <td>Storebrand&nbsp;Nuclear</td>
-          <td class="text-right">1,50%</td>
-          <td class="text-right">50&nbsp;%</td>
-          <td class="text-right">2</td>
-          <td class="text-right">Middels</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
 
     <h3 class="top-margin-40">Table with hover effect in rows</h3>
     <p>
@@ -888,50 +847,11 @@ $(document).ready(function() {
       For more information, please see the original <a href="http://tablesorter.com/docs/">project documentation</a>.
     </p>
     <p>
-      We have used tablesorter in our standard fund lists, see example below.
+      You can use tablesorter like this to sort a table with contents that loads slowly:
     </p>
-    <div id="tableTitle"></div>
-    <div class="table-responsive">
-      <table id="list-of-funds" class="stb-table fund-table tablesorter">
-      </table>
-    </div>
-    <script type="text/javascript">
-      listFunds(['active'], 'Viser nå bare aktivt forvaltede fond', '#list-of-funds', 'show', 'show', 'no-trading-please');
-      setTimeout(function(){sortTable('#list-of-funds');}, 666);
-    </script>
-
-    <h3>Standard funds lists</h3>
-    <p>
-      The kind of fund list shown above, but with live data, can easily be added to any page by including a placeholder and calling a script:
-    </p>
-    <p>Placeholder:</p>
-    <pre class="prettyprint">
-&lt;div id="tableTitle"&gt;&lt;/div&gt;
-&lt;div class="table-responsive"&gt;
-  &lt;table id="id-for-table-insertion" class="stb-table fund-table tablesorter"&gt;
-  &lt;/table&gt;
-&lt;/div&gt;</pre>
-    <p>Script:</p>
     <pre>
-  listFunds(["storebrand"], "Title above list", "#id-for-table-insertion", "show|hide", "show|hide", "private|professional|whatever");
-  setTimeout(function(){sortTable('#list-of-funds');}, 666);</pre>
-    <p>
-      The "listFunds" function takes six parameters:
-    </p>
-    <ol class="stb">
-      <li>An array of ISIN or certain predefined strings ("all" for all funds we have data for, "delphi" for all Delphi funds, "storebrand" for all Storebrand funds, "storebrand-private" for private market funds, "storebrand-professional" for professional investors funds, "active" for actively managed funds, "factor" for factor funds, "index" for index funds" and "interest" for interest rate funds).</li>
-      <li>A title that will be injected above the fund list.</li>
-      <li>An id of the placeholder table you want to fill with fund data.</li>
-      <li>A flag to "hide" or "show" a column showing the sustainability rating for the fund.</li>
-      <li>A flag to "hide" or "show" a column showing the risk (1-7) for the fund.</li>
-      <li>A flag to "hide" or show links to pages where the fund can be traded, either for "private" or "professional" investors.</li>
-    </ol>
-    <p>
-      You can of course have as many different lists as you want on any single page.
-    </p>
-    <p>
-      If you're not happy with this presentation, or your application is on a page that is not allowed to retrieve the JSON feed directly, you can always retrieve the <a href='https://www.storebrand.no/api/open/fundlist/list'>raw data</a> instead, and do whatever you want with it.
-    </p>
+      setTimeout(function(){sortTable('#id-to-slow-table');}, 666);</pre>
+
   </div>
 
 </div> <!-- /Tables row -->
@@ -3823,7 +3743,7 @@ T        </p>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//elements.storebrand.no/analytics/analytics-gtm.js','ga');
+  })(window,document,'script','https://elements.storebrand.no/analytics/analytics-gtm.js','ga');
   ga('create', 'UA-41882079-4', 'storebrand.no');
   ga('set', 'anonymizeIp', true);
   ga('send', 'pageview');
