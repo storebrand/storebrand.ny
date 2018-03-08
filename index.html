@@ -82,37 +82,41 @@
 
     <div class="row">
       <div class="col-md-12" style="margin-bottom: 6px;">
-        <h1>Storebrand.ny - Version 1.0.8</h1>
+        <h1>Storebrand.ny - Version 1.2.0</h1>
         <p class="intro">
-          <a href="webmanual.html">Web manual</a> and <a href="formmanual.html">Form manual</a> as of <strong>7 August 2017</strong>
+          <a href="webmanual.html">Web manual</a> and <a href="formmanual.html">Form manual</a> as of <strong>8 March 2018</strong>
         </p>
         <hr>
         <p>
-          <strong>Notice:</strong> If you are on old versions of the webmanual, <strong>update to latest</strong>. This is to comply with WCAG 2.0 spec.
-        </p>
-        <p>
-          Version 0.94 has been patched to comply, but ALL other versions should update to latest.
+          <strong>Notice:</strong>Versions 0.94 and upwards are WCAG-wise fine. If your application is on an older version than that, <strong>please update</strong>.
         </p>
         <hr />
         <p>
           What's new in the last few versions, you ask? Well:
         </p>
         <ul class="stb">
+          <li>1.2.0:
+            <ul>
+              <li>Bumping minor version to reflect that we're <strong>transitioning away from the old png-sprite icons</strong>.</li>
+              <li>Removed old png-sprite icons from the examples (still available in the css, for backwards-compatability), add link to InVision DSM which has the new icon sets</li>
+              <li>Buttons: all buttons now have a border-radius of 2px (previously 0)</li>
+            </ul>
+          </li>
+          <li>1.1.0: 
+            <ul>
+              <li>Bootstrap vulnerability bump from 3.3.6 to 3.3.7.</li>
+              <li>jQuery vulnerability bump from 2.1.0 to 3.3.1 (so yes, you may need to rephrase some of your jQuery scripts)</li>
+              <li>Moment vulnerability bump from 2.8.3 to 2.20.1</li>
+              <li>jquery-match-height functionality bump from 0.7.0 to 0.7.2</li>
+              <li>As a result of the bumps, the scrollable tables (Zurb) are not working in this version of the Web manual. We haven't decided what to do about that yet.</li>
+              <li>The fund list table has been removed from the web manual, heavily hit by real-life need for significant local adjustments in almost every instance.</li>
+              <li>scrollTo function has been renamed stbScrollTo because of clash with native window.scrollTo.</li>
+              <li>New support color; stb-support-aqua, #1d8d9b.</li>
+              <li>YouTube player fix, so that video doesn't restart after a while when container iframe is hidden.</li>
+            </ul>            
           <li>1.0.8: Minor fix/workaround for IE bug concerning search URLs containing Norwegian characters</li>
           <li>1.0.7: Added shopping cart utility functions (<a href="https://github.com/storebrand/storebrand.ny/pull/47">PR</a>)</li>
           <li>1.0.6: Updated Form manual with simpler and better slider.</li>
-          <li>1.0.5: Updated spritesheet (new "magazine" icon, added missing icons: upload, download, dragndrop, visible, folder, new-folder)</li>
-          <li>1.0.4: Adding flexibility to Big box. If it contains several links, the box will not be made clickable as a whole with the rel parameter link.</li>
-          <li>1.0.2: Fixes for .disabled .stb-btn, contrast increased to comply with WCAG 2.0 AA.</li>
-          <li>1.0.1: Dont show shoppingcart if item count is zero. (see <a href="https://github.com/storebrand/storebrand.ny/pull/44">PR</a>)</li>
-          <li>1.0.0: Moving to Semver versioning, we ran out of numbers on the old scheme.</li>
-          <li>1.0.0: Focus outline for .stb-btn is back (we need to comply with WCAG 2.0)</li>
-          <li>0.99: Fixes for shopping-cart icon (see <a href="https://github.com/storebrand/storebrand.ny/pull/40">Github PR</a>)</li>
-          <li>0.95: New sprite-icon: .stb-color-sprite-[medium|small].info.white</li>
-          <li>0.95: Added .link-lookalike class</li>
-          <li>Cleaned up tables section, including adding sortable tables.</li>
-          <li>Added standard fund list functionality.</li>
-          <li>Some minor font fixes (header types)
         </ul>
       </div>
     </div>
@@ -122,8 +126,8 @@
             <h2>How to play</h2>
             <p>Here's the gzipped code you'll want to include to start playing with this version:</p>
             <pre>
- &lt;link rel="stylesheet" type="text/css" href="//elements.storebrand.no/storebrand.ny/1.0.8/css/stb-all.min.css"&gt;
- &lt;script type="text/javascript" src="//elements.storebrand.no/storebrand.ny/1.0.8/js/stb-all.min.js"&gt;&lt;/script&gt;</pre>
+ &lt;link rel="stylesheet" type="text/css" href="//elements.storebrand.no/storebrand.ny/1.1.0/css/stb-all.min.css"&gt;
+ &lt;script type="text/javascript" src="//elements.storebrand.no/storebrand.ny/1.1.0/js/stb-all.min.js"&gt;&lt;/script&gt;</pre>
       </div>
     </div>
 
@@ -133,17 +137,19 @@
       Previous official versions:
     </p>
     <ul class="stb">
+      <li><a href="../1.1.0/index.html">1.1.0</a></li>
+      <li><a href="../1.0.8/index.html">1.0.8</a></li>
       <li><a href="../1.0.5/index.html">1.0.5</a></li>
       <li><a href="../1.0.4/index.html">1.0.4</a></li>
       <li><a href="../1.0.2/index.html">1.0.2</a></li>
       <li><a href="../1.0.1/index.html">1.0.1</a></li>
       <li><a href="../0.99/index.html">0.99</a></li>
-      <li><a href="../0.96/index.html">0.96</a></li>
-      <li><a href="../0.94/index.html">0.94</a></li>
     </ul>
     <p>
       <a href="#" onclick="$('#oldies').toggle(200); return false;">List of ancient versions</a>
       <div id="oldies" style="display: none;">
+        <a href="../0.96/index.html">0.96</a><br />
+        <a href="../0.94/index.html">0.94</a><br />
         <a href="../0.92/index.html">0.92</a><br />
         <a href="../0.89/index.html">0.89</a><br />
         <a href="../0.88/index.html">0.88</a><br />
@@ -202,7 +208,7 @@
       </div>
     </div>
     <div class="container">
-      <p>Opphavsrett © Storebrand 2016</p>
+      <p>Opphavsrett © Storebrand 2018</p>
     </div>
   </footer>
   <footer xmlns:portal="http://www.enonic.com/cms/xslt/portal" xmlns:stk="http://www.enonic.com/cms/xslt/stk" xmlns:stb="http://www.storebrand.no/cms/xslt/stb" xmlns:xs="http://www.w3.org/2001/XMLSchema" class="mobilefooter stbcolor-primary first stb-footer visible-xs">
@@ -219,7 +225,7 @@
     <div class="container">
       <div class="row copyright">
         <div class="col-xs-12">
-          <p>Opphavsrett © Storebrand 2016</p>
+          <p>Opphavsrett © Storebrand 2018</p>
         </div>
       </div>
     </div>
